@@ -20,16 +20,16 @@ jobs:
         run: |
           ls ${{ github.workspace }}
 
-      ## Preparation ##
-      - uses: actions/checkout@v3
-      ## get properties ##
-      - name: get properties
-        id: json_properties
-        uses: ./
-        with:
-          path: 'package.json'
-      - run: |
-          echo ${{ steps.json_properties.outputs.version }}
+      # ## Preparation ##
+      # - uses: actions/checkout@v3
+      # ## get properties ##
+      # - name: get properties
+      #   id: json_properties
+      #   uses: ./
+      #   with:
+      #     path: 'package.json'
+      # - run: |
+      #     echo ${{ steps.json_properties.outputs.version }}
       ## Build dockerfile ##
       # - name: Build the Docker image
       #   run: |
