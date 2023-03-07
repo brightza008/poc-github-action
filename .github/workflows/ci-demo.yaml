@@ -4,7 +4,7 @@ on:
   push:
     branches: [ action-ci ]
 jobs:
-  Build CI:
+  Build-CI:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -19,11 +19,11 @@ jobs:
           ls ${{ github.workspace }}
 
       ## Preparation ##
-      # - name: get properties
-      # id: json_properties
-      # with:
-      #   file_path: "package.json"
-      #   run: echo ${{steps.json_properties.outputs.version}}
+      - name: get properties
+      id: json_properties
+      with:
+        file_path: "package.json"
+        run: echo ${{steps.json_properties.outputs.version}}
 
       ## Build dockerfile ##
       - uses: actions/checkout@v2
