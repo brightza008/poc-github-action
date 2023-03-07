@@ -32,7 +32,8 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
-          echo "::set-output name=packageJson::$content"
+          #echo "::set-output name=packageJson::$content"
+          echo "packageJson=$content" >> $GITHUB_OUTPUT
       - run: |
           echo "${{fromJson(steps.json_properties.outputs.packageJson).name}}"
           echo "${{fromJson(steps.json_properties.outputs.packageJson).version}}"
