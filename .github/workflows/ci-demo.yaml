@@ -5,7 +5,7 @@ on:
     branches: [ action-ci ]
 jobs:
   Explore-GitHub-Actions:
-    runs:
+    runs-on:
       using: 'node16'
       main: 'main.js'
     steps:
