@@ -24,7 +24,7 @@ jobs:
       with:
         file_path: "package.json"
       - run: |
-          echo ${{steps.json_properties.outputs.version}}
+          echo ${{ steps.json_properties.outputs.version }}
 
       ## Build dockerfile ##
       - uses: actions/checkout@v2
