@@ -21,9 +21,11 @@ jobs:
       ## Preparation ##
       - name: get properties
         id: json_properties
+        uses: actions/checkout@v3
         with:
           file_path: "package.json"
-        run: echo ${{ steps.json_properties.outputs.version }}
+      - run: |
+          echo ${{ steps.json_properties.outputs.version }}
 
       ## Build dockerfile ##
       - uses: actions/checkout@v2
