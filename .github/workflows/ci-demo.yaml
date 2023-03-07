@@ -31,7 +31,7 @@ jobs:
       ## Build dockerfile ##
       - name: Build the Docker image
         run: |
-          echo ${{ steps.json_properties.outputs.version }}
+          echo ${{steps.json_properties.outputs.version}}
           docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:$(date +%s)
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
