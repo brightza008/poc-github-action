@@ -21,6 +21,6 @@ jobs:
       ## Build dockerfile ##
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+        run: docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:$(date +%s)
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
