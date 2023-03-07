@@ -20,9 +20,9 @@ jobs:
 
       ## Preparation ##
       - name: get properties
-      id: json_properties
-      with:
-        file_path: "package.json"
+        id: json_properties
+        with:
+          file_path: "package.json"
       - run: |
           echo ${{ steps.json_properties.outputs.version }}
 
