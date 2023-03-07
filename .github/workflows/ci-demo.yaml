@@ -23,7 +23,7 @@ jobs:
         id: json_properties
         with:
           file_path: "package.json"
-      - run: |
+        run: |
           echo ${{ steps.json_properties.outputs.version }}
 
       ## Build dockerfile ##
