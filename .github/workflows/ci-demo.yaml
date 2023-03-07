@@ -25,7 +25,6 @@ jobs:
       ## get properties ##
       - name: get properties
         id: json_properties
-        uses: ./
         with: 
           file_path: 'package.json'
 
