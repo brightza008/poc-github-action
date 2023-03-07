@@ -38,9 +38,8 @@ jobs:
           echo "${{fromJson(steps.json_properties.outputs.packageJson).version}}"
 
       ## Build dockerfile ##
-      # - name: Build the Docker image
-      #   run: |
-      #     echo ${{steps.json_properties.outputs.version}}
-      #     docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.version }}
+      - name: Build the Docker image
+        run: |
+          docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:${{fromJson(steps.json_properties.outputs.packageJson).version}}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
