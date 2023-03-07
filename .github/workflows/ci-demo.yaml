@@ -25,7 +25,8 @@ jobs:
       ## get properties ##
       - name: get properties
         id: json_properties
-        uses: ${{ github.workspace }}
+        uses: ./
+        run: ls -lrt
         with:
           path: 'package.json'
       - run: |
