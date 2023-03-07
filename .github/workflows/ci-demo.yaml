@@ -20,8 +20,14 @@ jobs:
         run: |
           ls ${{ github.workspace }}
 
+<<<<<<< HEAD
       ## Preparation ##
       # - uses: actions/checkout@v3
+=======
+
+      ## Preparation ##
+      - uses: actions/checkout@v3
+>>>>>>> d7f0bf345f848ef6ba3212e145d1d21e525f9bb4
       ## get properties ##
       - name: get properties
         id: json_properties
@@ -30,6 +36,10 @@ jobs:
           path: 'package.json'
       - run: |
           echo ${{ steps.json_properties.outputs.version }}
+<<<<<<< HEAD
+=======
+          
+>>>>>>> d7f0bf345f848ef6ba3212e145d1d21e525f9bb4
       ## Build dockerfile ##
       # - name: Build the Docker image
       #   run: |
