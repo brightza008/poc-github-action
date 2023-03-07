@@ -29,10 +29,6 @@ jobs:
       ## Build dockerfile ##
       - uses: actions/checkout@v2
       - name: Build the Docker image
-          with: 
-              path: 'package.json'
-              prop_path: 'version'
-      - run: echo ${{steps.version.outputs.prop}} 
         run: docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:$(date +%s)
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
