@@ -27,10 +27,11 @@ jobs:
         id: json_properties
         # uses: ./
         run: ls -lrt
-        with:
-          path: 'package.json'
-      - run: |
-          echo ${{ steps.json_properties.outputs.version }}
+      #   with:
+      #     path: 'package.json'
+      # - run: |
+      #     echo ${{ steps.json_properties.outputs.version }}
+
       ## Build dockerfile ##
       # - name: Build the Docker image
       #   run: |
