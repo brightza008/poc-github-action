@@ -27,15 +27,12 @@ jobs:
         id: json_properties
         run: |
           echo "RELEASE_TAG=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
-          echo "Build tag==>" $RELEASE_TAG
-
       - run: |
-          echo "${{ steps.json_properties.outputs.RELEASE_TAG }}"
+          echo "Build tag==> ${{ steps.json_properties.outputs.RELEASE_TAG }}"
 
       ## Build dockerfile ##
       - name: Build the Docker image
         run: |
-          echo $RELEASE_TAG
           docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
 
       - name: Login to Docker Hub
