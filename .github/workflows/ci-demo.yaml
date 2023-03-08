@@ -26,7 +26,7 @@ jobs:
       - name: get properties
         id: json_properties
         run: |
-          RELEASE_TAG=$(jq -r .version package.json)
+          echo "RELEASE_TAG=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
           echo "Build tag==>" $RELEASE_TAG
 
       - run: |
