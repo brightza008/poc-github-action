@@ -36,6 +36,7 @@ jobs:
           #echo "::set-output name=packageJson::$content"
           echo ${content}
           echo "packageJson=${content}" >> $GITHUB_OUTPUT
+          echo $GITHUB_OUTPUT
       - run: |
           echo "${{ steps.json_properties.outputs.name }}"
           echo "${{fromJson(steps.json_properties.outputs.packageJson).version}}"
