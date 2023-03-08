@@ -35,7 +35,7 @@ jobs:
           #echo "::set-output name=packageJson::$content"
           echo "packageJson=${content}" >> $GITHUB_OUTPUT
       - run: |
-          echo "${{fromJson(steps.json_properties.outputs.name)}}"
+          echo "${{ steps.json_properties.outputs.name }}"
           echo "${{fromJson(steps.json_properties.outputs.packageJson).version}}"
 
       ## Build dockerfile ##
