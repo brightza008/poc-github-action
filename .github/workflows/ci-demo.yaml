@@ -26,19 +26,11 @@ jobs:
       - name: get properties
         id: json_properties
         run: |
-          content=`cat ./package.json`
-          # the following lines are only required for multi line json
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          # end of optional handling for multi line json
-          echo "::set-output name=packageJson::$content"
-          echo "$content"
-          #echo "packageJson=${content}" >> $GITHUB_OUTPUT
-          
+          RELEASE_TAG=$(jq -r .version package.json)
+          echo "Build tag==>" $RELEASE_TAG
+
       - run: |
-          echo "${{fromJson(steps.json_properties.outputs.packageJson).name}}"
-          echo "${{fromJson(steps.json_properties.outputs.packageJson).version}}"
+          echo "${{ steps.json_properties.outputs.RELEASE_TAG }}"
 
       ## Build dockerfile ##
       - name: Build the Docker image
