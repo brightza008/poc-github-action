@@ -48,6 +48,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: pongu/${{ github.event.repository.name }}:${{fromJson(steps.json_properties.outputs.packageJson).version}}
+          tags: pongu/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
