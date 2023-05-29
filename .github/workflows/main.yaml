@@ -1,0 +1,1 @@
+{{ include('pipeline-orchestrator/archetypes/nodejs/main-nodejs.yaml') }}
