@@ -1,4 +1,4 @@
-name: Node.js CI
+name: POC-reuse-workflow
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   push:
