@@ -1,0 +1,13 @@
+## init
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - action-ci
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+{{ include('my-modules.yaml') }}
