@@ -30,7 +30,4 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    steps:
-
       {{ include('modules.yaml') }}
