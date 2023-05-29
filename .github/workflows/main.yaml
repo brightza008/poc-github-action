@@ -1,1 +1,22 @@
-{{ include('pipeline-orchestrator/archetypes/nodejs/main-nodejs.yaml') }}
+name: My Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+        {{ include('pipeline-orchestrator/archetypes/nodejs/main-nodejs.yaml') }}
+    # Paste the content of the main.yaml file here
+
+      - name: Another Step
+        run: echo "This is another step"
+
+
