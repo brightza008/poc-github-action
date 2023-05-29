@@ -35,4 +35,4 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      {{ include('modules.yaml') }}
+        run: {{ include('modules.yaml') }}
