@@ -35,4 +35,4 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      {{ include('pipeline-orchestrator/modules/modules.yaml') }}
+          {{ include('pipeline-orchestrator/modules/modules.yaml') }}
