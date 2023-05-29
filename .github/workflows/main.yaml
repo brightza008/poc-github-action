@@ -34,7 +34,15 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        
-      - name: Checkout Repository
+
+      # {{ include('pipeline-orchestrator/modules/modules.yaml') }}
+      - name: Import Modules
         run: |
-          {{ include('pipeline-orchestrator/modules/modules.yaml') }}
+          echo "::set-output name=modules::$(cat pipeline-orchestrator/modules/modules.yaml)"
+          # echo "::set-output name=modules2::$(cat modules2.yaml)"
+          
+      - name: Run Imported Modules
+        run: |
+          echo "${{ steps.import_modules.outputs.modules }}" > imported_modules.yaml
+          # echo "${{ steps.import_modules.outputs.modules2 }}" >> imported_modules.yaml
+          echo "::add-matcher::imported_modules.yaml"
