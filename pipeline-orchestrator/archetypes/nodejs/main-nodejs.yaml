@@ -1,13 +1,12 @@
-## init
-name: Main Workflow
+name: nodejs-arcetypes
 
 on:
-  push:
-    branches:
-      - action-ci
-
+  workflow_call:
+  
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    {{ include('my-modules.yaml') }}
+  call-workflow-A:
+    uses: brightza008/poc-github-action/poc-github-action/pipeline-orchestrator/modules/docker-build.yaml@action-ci
+    with:
+      username: ${{ secrets.MY_DOCKER_USERNAME }}
+    secrets:
+      token: ${{ secrets.MY_DOCKER_PASSWORD }}

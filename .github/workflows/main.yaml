@@ -46,3 +46,8 @@ jobs:
           echo "${{ steps.import_modules.outputs.modules }}" > imported_modules.yaml
           # echo "${{ steps.import_modules.outputs.modules2 }}" >> imported_modules.yaml
           echo "::add-matcher::imported_modules.yaml"
+          
+      - name: Execute Job
+        uses: some-action
+        with:
+          modules: ${{ steps.import_modules.outputs.modules }}
