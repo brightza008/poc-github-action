@@ -20,7 +20,6 @@
 #         run: echo "This is another step"
 
 
-## init
 name: Main Workflow
 
 on:
@@ -32,4 +31,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    {{ include('pipeline-orchestrator/modules/my-modules.yaml') }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      {{ include('modules.yaml') }}
