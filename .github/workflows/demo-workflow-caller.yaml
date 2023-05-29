@@ -5,4 +5,4 @@ on:
     branches: [ action-ci ]
 jobs:
   call-workflow-A:
-    uses: brightza008/poc-github-action/poc-github-action/pipeline-orchestrator/archetypes/nodejs/main-nodejs.yaml@action-ci
+    uses: brightza008/poc-github-action/poc-github-action/.github/workflows/pipeline-orchestrator/archetypes/nodejs/main-nodejs.yaml@action-ci
