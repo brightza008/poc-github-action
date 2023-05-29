@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-        {{ include('pipeline-orchestrator/archetypes/nodejs/main-nodejs.yaml') }}
+      {{ include('pipeline-orchestrator/archetypes/nodejs/main-nodejs.yaml') }}
     # Paste the content of the main.yaml file here
 
       - name: Another Step

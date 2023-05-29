@@ -10,4 +10,4 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-{{ include('my-modules.yaml') }}
+    {{ include('my-modules.yaml') }}
