@@ -8,8 +8,8 @@ on:
 jobs:
   call-workflow-A:
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
-    secrets: 
-      username: ${{secrets.MY_DOCKER_USERNAME}}
+    with: 
+      username: ${{ secrets.MY_DOCKER_USERNAME }}
 
   echo:
     runs-on: ubuntu-latest
