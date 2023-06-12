@@ -31,13 +31,14 @@ jobs:
           echo "Exposing env vars"
 
     invoke-workflow:
-      needs: env_workflow
+    #   needs: env_workflow
       name: "start reuse-workflow"
       uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
       with:
-          username: ${{ needs.env_workflow.outputs.user }}
+        #   username: ${{ needs.env_workflow.outputs.user }}
+        username: ${{env.docker_user}}
       secrets:
         # token: ${{ needs.env_workflow.outputs.pass }}
-        token: ${{ secrets.MY_DOCKER_PASSWORD }}
+        token: ${{env.docker_password}}
 
     
