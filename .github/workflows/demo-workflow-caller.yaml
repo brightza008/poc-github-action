@@ -7,13 +7,14 @@ on:
       - .github/workflows/demo-workflow-caller.yaml
 
 env:
+  var1: hello_var1
   dockerhub_username: ${{ vars.MY_DOCKER_USERNAME }}
 
 jobs:
   call-workflow-A:
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
     with:
-      username: ${{vars.MY_DOCKER_USERNAME}}
+      username: ${{ env.dockerhub_username }}
     secrets:
       token: ${{ secrets.MY_DOCKER_PASSWORD }}
 
@@ -23,8 +24,3 @@ jobs:
     - name: Build the Docker image
       run: |
         echo "echo from Gibhub variable: ${dockerhub_username}"
-
-    # with: 
-    #   username: ${{ secrets.MY_DOCKER_USERNAME }}
-    #   token: ${{ secrets.MY_DOCKER_PASSWORD }}
- 
