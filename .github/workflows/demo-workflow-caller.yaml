@@ -6,54 +6,24 @@ on:
     paths:
       - .github/workflows/demo-workflow-caller.yaml
 
-env:
-  var1: hello_var1
-  dockerhub_username: ${{ vars.MY_DOCKER_USERNAME }}
+env: 
+    docker_user: ${{vars.MY_DOCKER_USERNAME}}
+    docker_password: ${{secrets.MY_DOCKER_PASSWORD}}
 
 jobs:
-  call-workflow-A:
-  #   runs-on: ubuntu-latest
-  #   env:
-  #       dockerhub_username: 'user1'
-  # steps:
+  env_workflow:
+    runs-on: ubuntu-latest
+    name: Setup Output Env
+    outputs: 
+      user: ${{env.docker_user}}
+      pass: ${{env.docker_password}}
+
+  invoke-workflow:
+    needs: env_workflow
+    name: "Build Docker"
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
     with:
-      username: ${{env.dockerhub_username}}
+      username: ${{ needs.env_workflow.outputs.user }}
     secrets:
-      token: ${{ secrets.MY_DOCKER_PASSWORD }}
-
-  echo:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Build the Docker image
-      run: |
-        echo "echo from Github variable: ${dockerhub_username}"
-
-################
-# jobs:
-#   build:
-#     env:
-#         JAVA_VERSION: '11'
-#   steps:
-#   - uses: actions/checkout@v3
-#   - name: Set up JDK ${{env.JAVA_VERSION}}
-#   uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
-#   with:
-#     username: ${{ env.dockerhub_username }}
-#   secrets:
-#     token: ${{ secrets.MY_DOCKER_PASSWORD }}
-
-
-# jobs:
-#   build:
-#     # env:
-#     #     docker_username: ${{vars.MY_DOCKER_USERNAME}}
-
-#     # runs-on: ubuntu-latest
-
-#     # steps:
-#     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
-#     with:
-#        username: ${{ env.dockerhub_username }}
-#     secrets:
-#       token: ${{ secrets.MY_DOCKER_PASSWORD }}
+      # token: ${{ needs.env_workflow.outputs.pass }}
+      token: ${{secrets.MY_DOCKER_PASSWORD}}
