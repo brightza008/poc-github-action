@@ -8,7 +8,7 @@ on:
 env: 
     global_var1: HOUSE
     docker_user: ${{vars.MY_DOCKER_USERNAME}}
-    dockre_password: ${{secrets.MY_DOCKER_PASSWORD}}
+    docker_password: ${{secrets.MY_DOCKER_PASSWORD}}
 
 jobs: 
     poc_env_var: 
@@ -18,14 +18,14 @@ jobs:
       steps:
         - name: run echo
           run: |
-            echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}
+            echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}"
 
 #### expose variable environment into reuse-workflow ###
     env_workflow:
       runs-on: ubuntu-latest
       outputs: 
         user: ${{env.docker_user}}
-        pass: ${{env.dockre_password}}
+        pass: ${{env.docker_password}}
       steps:
       - run: |
           echo "Exposing env vars"
