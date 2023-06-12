@@ -37,6 +37,7 @@ jobs:
       with:
           username: ${{ needs.env_workflow.outputs.user }}
       secrets:
-        token: ${{ needs.env_workflow.outputs.pass }}
+        # token: ${{ needs.env_workflow.outputs.pass }}
+        token: ${{ secrets.MY_DOCKER_PASSWORD }}
 
     
