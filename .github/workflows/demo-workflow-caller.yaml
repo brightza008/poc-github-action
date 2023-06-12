@@ -1,5 +1,5 @@
 name: POC-reuse-workflow
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+#run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   push:
     branches: [ action-ci ]
@@ -12,10 +12,10 @@ env:
 
 jobs:
   call-workflow-A:
-    runs-on: ubuntu-latest
-    env:
-        dockerhub_username: 'user1'
-  steps:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #       dockerhub_username: 'user1'
+  # steps:
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
     with:
       username: "${dockerhub_username}"
