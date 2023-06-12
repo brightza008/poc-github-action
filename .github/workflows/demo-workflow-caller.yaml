@@ -7,7 +7,7 @@ on:
       - .github/workflows/demo-workflow-caller.yaml
 jobs:
   call-workflow-A:
-    uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
+    uses: .github/workflows/docker-build.yaml@workflow
     with: 
       username: ${{ secrets.MY_DOCKER_USERNAME }}
       #token: ${{ secrets.MY_DOCKER_PASSWORD }}
