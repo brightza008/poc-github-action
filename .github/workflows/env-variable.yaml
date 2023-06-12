@@ -8,6 +8,7 @@ on:
 env: 
     global_var1: HOUSE
     docker_user: ${{vars.MY_DOCKER_USERNAME}}
+    dockre_password: ${{secrets.MY_DOCKER_PASSWORD}}
 
 jobs: 
     poc_env_var: 
@@ -17,10 +18,25 @@ jobs:
       steps:
         - name: run echo
           run: |
-            echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}"
-        - name: reuse-workflow
-          uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
-          with:
-            username: ${docker_user}
-        #   secrets:
-        #     token: ${{secrets.MY_DOCKER_PASSWORD}}
+            echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}
+
+#### expose variable environment into reuse-workflow ###
+    env_workflow:
+      runs-on: ubuntu-latest
+      outputs: 
+        user: ${{env.docker_user}}
+        pass: ${{env.dockre_password}}
+      steps:
+      - run: |
+          echo "Exposing env vars"
+
+    invoke-workflow:
+      needs: env_workflow
+      name: "start reuse-workflow"
+      uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
+      with:
+          username: ${{ needs.env_workflow.outputs.user }}
+      secrets:
+        token: ${{ needs.env_workflow.outputs.pass }}
+
+    
