@@ -7,8 +7,16 @@ on:
       - .github/workflows/demo-workflow-caller.yaml
 jobs:
   call-workflow-A:
-    uses: ./.github/workflows/docker-build.yaml@workflow
-    with: 
-      username: ${{ secrets.MY_DOCKER_USERNAME }}
-      #token: ${{ secrets.MY_DOCKER_PASSWORD }}
+    uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
+    
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build the Docker image
+      run: |
+        echo "asdfjaskdf;aksjdhf"
+
+    # with: 
+    #   username: ${{ secrets.MY_DOCKER_USERNAME }}
+    #   token: ${{ secrets.MY_DOCKER_PASSWORD }}
  
