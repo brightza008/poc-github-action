@@ -31,6 +31,7 @@ jobs:
       steps:
       - run: |
           echo "Exposing env vars"
+          echo "${user}"
 # Note 
 # To use the reuse-workflow 
 # can't use `${{env.variable}}` into the workflow it need to setup variable output as The Jobs above 
