@@ -26,6 +26,8 @@ on:
   push:
     branches:
       - action-ci
+    paths:
+      - .github/workflows/main.yaml
 
 jobs:
   build:
