@@ -13,7 +13,7 @@ jobs:
   call-workflow-A:
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
     with:
-      username: $dockerhub_username
+      username: "$dockerhub_username"
     secrets:
       token: ${{ secrets.MY_DOCKER_PASSWORD }}
 
