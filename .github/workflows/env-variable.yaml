@@ -7,7 +7,7 @@ on:
 
 env: 
     global_var1: HOUSE
-    docker_user: ${{vars.MY_DOCKER_USERNAME}}
+    docker_user: ${{secrets..MY_DOCKER_USERNAME}}
     docker_password: ${{secrets.MY_DOCKER_PASSWORD}}
 
 jobs: 
