@@ -6,28 +6,28 @@ on:
     paths:
       - .github/workflows/demo-workflow-caller.yaml
 
-# # env:
-# #   var1: hello_var1
-# #   # dockerhub_username: ${{ vars.MY_DOCKER_USERNAME }}
+env:
+  var1: hello_var1
+  dockerhub_username: ${{ vars.MY_DOCKER_USERNAME }}
 
-# jobs:
-#   call-workflow-A:
-#     runs-on: ubuntu-latest
-#     env:
-#         dockerhub_username: 'user1'
-#   steps:
-#     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
-#     with:
-#       username: ${{ env.dockerhub_username }}
-#     secrets:
-#       token: ${{ secrets.MY_DOCKER_PASSWORD }}
+jobs:
+  call-workflow-A:
+    runs-on: ubuntu-latest
+    env:
+        dockerhub_username: 'user1'
+  steps:
+    uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
+    with:
+      username: "${dockerhub_username}"
+    secrets:
+      token: ${{ secrets.MY_DOCKER_PASSWORD }}
 
-#   echo:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Build the Docker image
-#       run: |
-#         echo "echo from Github variable: ${dockerhub_username}"
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build the Docker image
+      run: |
+        echo "echo from Github variable: ${dockerhub_username}"
 
 ################
 # jobs:
@@ -44,16 +44,16 @@ on:
 #     token: ${{ secrets.MY_DOCKER_PASSWORD }}
 
 
-jobs:
-  build:
-    env:
-        docker_username: ${{vars.MY_DOCKER_USERNAME}}
+# jobs:
+#   build:
+#     # env:
+#     #     docker_username: ${{vars.MY_DOCKER_USERNAME}}
 
-    runs-on: ubuntu-latest
+#     # runs-on: ubuntu-latest
 
-    steps:
-    - uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
-      with:
-        username: ${{ env.dockerhub_username }}
-        secrets:
-        token: ${{ secrets.MY_DOCKER_PASSWORD }}
+#     # steps:
+#     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
+#     with:
+#        username: ${{ env.dockerhub_username }}
+#     secrets:
+#       token: ${{ secrets.MY_DOCKER_PASSWORD }}
