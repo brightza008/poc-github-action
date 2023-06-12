@@ -20,9 +20,8 @@ jobs:
     outputs: 
       user: ${{env.docker_user}}
       pass: ${{env.docker_password}}
-    steps: 
-      - run: |
-          echo "preparing output env"
+      run: |
+        echo "preparing output env"
     
   Build_Docker:
     needs: env_workflow
