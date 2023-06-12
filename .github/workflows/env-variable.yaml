@@ -20,7 +20,7 @@ jobs:
           run: |
             echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user} \n Docker Password= ${docker_password}"
 
-#### expose variable environment into reuse-workflow ###
+# expose variable environment into reuse-workflow #
     env_workflow:
       runs-on: ubuntu-latest
       outputs: 
@@ -29,16 +29,19 @@ jobs:
       steps:
       - run: |
           echo "Exposing env vars"
+# Note 
+# To use the reuse-workflow 
+# can't use `${{env.variable}}` into the workflow it need to setup variable output as The Jobs above 
+# and use `${{needs.JOBS.OUTPUT.output_name}}` 
 
     invoke-workflow:
-    #   needs: env_workflow
+      needs: env_workflow
       name: "start reuse-workflow"
       uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
       with:
-        #   username: ${{ needs.env_workflow.outputs.user }}
-        username: ${{env.docker_user}}
+        username: ${{ needs.env_workflow.outputs.user }}
       secrets:
         # token: ${{ needs.env_workflow.outputs.pass }}
-        token: ${{env.docker_password}}
+        token: ${{secrets.MY_DOCKER_PASSWORD}}
 
     
