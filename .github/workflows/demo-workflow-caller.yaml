@@ -13,7 +13,7 @@ jobs:
   call-workflow-A:
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
     with:
-      username: "$dockerhub_username"
+      username: ${{vars.MY_DOCKER_USERNAME}}
     secrets:
       token: ${{ secrets.MY_DOCKER_PASSWORD }}
 
@@ -22,7 +22,7 @@ jobs:
     steps:
     - name: Build the Docker image
       run: |
-        echo "asdfjaskdf;aksjdhf"
+        echo "echo from Gibhub variable: ${dockerhub_username}"
 
     # with: 
     #   username: ${{ secrets.MY_DOCKER_USERNAME }}
