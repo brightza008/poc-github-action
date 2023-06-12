@@ -8,8 +8,10 @@ on:
 jobs:
   call-workflow-A:
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
-    with: 
-      username: ${{ secrets.MY_DOCKER_USERNAME }}
+    with:
+      username: pongu
+    secrets:
+      token: ${{ secrets.MY_DOCKER_PASSWORD }}
 
   echo:
     runs-on: ubuntu-latest
