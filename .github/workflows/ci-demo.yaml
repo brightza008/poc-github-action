@@ -3,6 +3,8 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   push:
     branches: [ action-ci ]
+    paths:
+      - .github/workflows/ci-demo.yaml
 jobs:
   Build-CI:
     runs-on: ubuntu-latest

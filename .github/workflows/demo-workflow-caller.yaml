@@ -4,7 +4,7 @@ on:
   push:
     branches: [ action-ci ]
     paths:
-      - .github/workflows/demo-workflow-caller.yml
+      - .github/workflows/demo-workflow-caller.yaml
 jobs:
   call-workflow-A:
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow

@@ -3,6 +3,8 @@ name: Sonar scanner
 on: 
   push:
     branches: [ action-ci ]
+    paths:
+      - .github/workflows/sonarqube.yaml
 jobs:
   sonarcloud:
     name: SonarCloud
