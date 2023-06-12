@@ -10,10 +10,10 @@ env:
 
 jobs: 
     poc_env_var: 
-        runs-on: ubuntu-latest
-        env:
-            injob_var1: injob_var1
-        steps:
-            - name: run echo
-              run: |
-                echo "global var= ${global_var1} \n in job var= ${injob_var1}"
+      runs-on: ubuntu-latest
+      env:
+        injob_var1: injob_var1
+      steps:
+          - name: run echo
+            run: |
+              echo "global var= ${global_var1} \n in job var= ${injob_var1}"
