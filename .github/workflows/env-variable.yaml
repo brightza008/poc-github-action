@@ -1,0 +1,19 @@
+name: Node.js CI
+on: 
+  push:
+    branches: [ action-ci ]
+    paths:
+      - .github/workflows/env-variable.yaml
+
+env: 
+    global_var1: global_var1
+
+jobs: 
+    poc_env_var: 
+        runs-on: ubuntu-latest
+        env:
+            injob_var1: injob_var1
+        steps:
+            - name: run echo
+              run: |
+                echo "global var= ${global_var1} \n in job var= ${injob_var1}"
