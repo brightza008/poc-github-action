@@ -1,4 +1,4 @@
-name: Node.js CI
+name: POC-env-variable
 on: 
   push:
     branches: [ action-ci ]
@@ -15,6 +15,12 @@ jobs:
       env:
         injob_var1: ROOM
       steps:
-          - name: run echo
-            run: |
-              echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}"
+        - name: run echo
+          run: |
+            echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}"
+        - name: reuse-workflow
+          uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
+          with:
+            username: ${docker_user}
+        #   secrets:
+        #     token: ${{secrets.MY_DOCKER_PASSWORD}}
