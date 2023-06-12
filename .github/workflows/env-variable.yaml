@@ -18,7 +18,7 @@ jobs:
       steps:
         - name: run echo
           run: |
-            echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}"
+            echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user} \n Docker Password= ${docker_password}"
 
 #### expose variable environment into reuse-workflow ###
     env_workflow:
