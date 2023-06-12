@@ -7,6 +7,7 @@ on:
 
 env: 
     global_var1: HOUSE
+    docker_user: ${{vars.MY_DOCKER_USERNAME}}
 
 jobs: 
     poc_env_var: 
@@ -16,4 +17,4 @@ jobs:
       steps:
           - name: run echo
             run: |
-              echo "global var= ${global_var1} \n in job var= ${injob_var1}"
+              echo -e "global var= ${global_var1} \n in job var= ${injob_var1} \nDocker Username= ${docker_user}"
