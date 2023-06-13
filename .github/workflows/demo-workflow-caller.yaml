@@ -13,12 +13,13 @@ env:
 jobs:
   env_workflow:
     runs-on: ubuntu-latest
+    name: Setup Output Env
     outputs: 
       user: ${{env.docker_user}}
       pass: ${{env.docker_password}}
       run: |
         echo "preparing output env"
-    
+
   Build_Docker:
     needs: env_workflow
     name: "Build Docker"
