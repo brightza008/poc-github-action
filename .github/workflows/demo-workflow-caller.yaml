@@ -32,9 +32,12 @@ jobs:
       # token: ${{ needs.env_workflow.outputs.pass }}
       token: ${{secrets.MY_DOCKER_PASSWORD}}
 
-
+  Setup_AZ_Reources:
+    if: contains(github.event.commits[0].message, 'az')
+    name: "Build Docker to ACR"
+    uses: brightza008/poc-github-action/.github/workflows/az-authen.yaml@workflow
   Build_Docker_ACR:
-    if: contains(github.event.commits[0].message, 'acr')
+    if: contains(github.event.commits[0].message, 'az')
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-action/.github/workflows/docker-build-acr.yaml@workflow
  
