@@ -34,7 +34,7 @@ jobs:
 
   Setup_AZ_Reources:
     if: contains(github.event.commits[0].message, 'az')
-    name: "Build Docker to ACR"
+    name: "Azure login"
     uses: brightza008/poc-github-action/.github/workflows/az-authen.yaml@workflow
   Build_Docker_ACR:
     if: contains(github.event.commits[0].message, 'az')
