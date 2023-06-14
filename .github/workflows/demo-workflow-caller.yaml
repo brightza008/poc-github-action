@@ -37,3 +37,4 @@ jobs:
     if: contains(github.event.commits.message, 'acr')
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-action/.github/workflows/docker-build-acr.yaml@workflow
+ 
