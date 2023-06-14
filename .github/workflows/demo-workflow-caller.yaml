@@ -32,3 +32,8 @@ jobs:
       # token: ${{ needs.env_workflow.outputs.pass }}
       token: ${{secrets.MY_DOCKER_PASSWORD}}
 
+
+  Build_Docker_ACR:
+    if: contains(github.event.commits.message, 'acr')
+    name: "Build Docker to ACR"
+    uses: brightza008/poc-github-action/.github/workflows/docker-build-acr.yaml@workflow
