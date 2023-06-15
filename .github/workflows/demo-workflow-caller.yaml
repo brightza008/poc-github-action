@@ -27,7 +27,8 @@ jobs:
 
   Build_Docker:
     needs: env_workflow
-    name: "Build Docker"
+    if: contains(github.event.commits[0].message, 'hub')
+    name: "Build Docker to dockerhub"
     uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
     with:
       username: ${{ needs.env_workflow.outputs.user }}
@@ -79,6 +80,6 @@ jobs:
       - name: Build the Docker image
         run: |
           docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
-          docker tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }} ${{env.AZ_CONTAINER_NAME}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
+          docker tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }} ${{env.AZ_CONTAINER_REGISTRY}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
           docker push ${{env.AZ_CONTAINER_REGISTRY}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
  
