@@ -64,6 +64,7 @@ jobs:
       # AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
   Deploy_helm:
+    needs: env_workflow
     if: contains(github.event.commits[0].message, 'de')
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-workflow/.github/workflows/helm-aks.yaml@workflow
