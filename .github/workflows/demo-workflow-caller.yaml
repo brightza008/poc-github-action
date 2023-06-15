@@ -66,9 +66,11 @@ jobs:
   Deploy_helm:
     needs: env_workflow
     if: contains(github.event.commits[0].message, 'de')
-    name: "Build Docker to ACR"
+    name: "Helm deploy to AKS"
     uses: brightza008/poc-github-workflow/.github/workflows/helm-aks.yaml@workflow
     with:
       HELM_TEMPLATE_REPO: ${{needs.env_workflow.outputs.HELM_TEMPLATE_REPO}}
       HELM_TEMPLATE_BRANCH: ${{needs.env_workflow.outputs.HELM_TEMPLATE_BRANCH}}
+      AZ_RESOURCE_GROUP: better-mite-rg
+      AZ_AKS_NAME: better-mite-aks
 
