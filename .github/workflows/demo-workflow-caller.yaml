@@ -12,7 +12,9 @@ env:
 
     AZ_CONTAINER_REGISTRY: bbbacr.azurecr.io
     AZ_CONTAINER_NAME: bbbacr
-  
+
+    HELM_TEMPLATE_REPO: brightza008/poc-helmchart@minikube
+    HELM_TEMPLATE_BRANCH: minikube
 
 jobs:
   env_workflow:
@@ -24,6 +26,8 @@ jobs:
 
       AZ_CONTAINER_REGISTRY: ${{env.AZ_CONTAINER_REGISTRY}}
       AZ_CONTAINER_NAME: ${{env.AZ_CONTAINER_NAME}}
+      HELM_TEMPLATE_REPO: ${{env.HELM_TEMPLATE_REPO}}
+      HELM_TEMPLATE_BRANCH: ${{env.HELM_TEMPLATE_BRANCH}}
     steps:
       - run: |
           echo "preparing output env"
@@ -63,3 +67,7 @@ jobs:
     if: contains(github.event.commits[0].message, 'de')
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-workflow/.github/workflows/helm-aks.yaml@workflow
+    with:
+      HELM_TEMPLATE_REPO: ${{needs.env_workflow.outputs.HELM_TEMPLATE_REPO}}
+      HELM_TEMPLATE_BRANCH: ${{needs.env_workflow.outputs.HELM_TEMPLATE_BRANCH}}
+
