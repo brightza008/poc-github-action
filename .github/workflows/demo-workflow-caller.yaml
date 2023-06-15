@@ -71,7 +71,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
   Deploy_helm:
-    needs: env_workflow
+    needs: [env_workflow,AZ_LOGIN] 
     if: contains(github.event.commits[0].message, 'de')
     name: "Helm deploy to AKS"
     uses: brightza008/poc-github-workflow/.github/workflows/helm-aks.yaml@workflow
