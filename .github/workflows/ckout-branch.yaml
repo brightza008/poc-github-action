@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v3
         with:
             repository: brightza008/poc-helmchart
+            ref: minikube
       - run: |
           ls -R
           echo "Start Helm!!"
