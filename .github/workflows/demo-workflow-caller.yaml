@@ -41,8 +41,7 @@ jobs:
     if: contains(github.event.commits[0].message, 'login')
     name: "Azure login"
     uses: brightza008/poc-github-action/.github/workflows/az-authen.yaml@workflow
-    secrets:
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }} 
+
 
 
   Build_Docker_ACR:
