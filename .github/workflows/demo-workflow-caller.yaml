@@ -21,6 +21,9 @@ jobs:
     outputs: 
       user: ${{env.docker_user}}
       pass: ${{env.docker_password}}
+
+      AZ_CONTAINER_REGISTRY: ${{env.AZ_CONTAINER_REGISTRY}}
+      AZ_CONTAINER_NAME: ${{env.AZ_CONTAINER_NAME}}
     steps:
       - run: |
           echo "preparing output env"
@@ -50,8 +53,8 @@ jobs:
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-workflow/.github/workflows/docker-build-acr.yaml@workflow
     with:
-      AZ_CONTAINER_REGISTRY: ${{env.AZ_CONTAINER_REGISTRY}}
-      AZ_CONTAINER_NAME: ${{env.AZ_CONTAINER_NAME}}
+      AZ_CONTAINER_REGISTRY: ${{needs.env_workflow.outputs.AZ_CONTAINER_REGISTRY}}
+      AZ_CONTAINER_NAME: ${{needs.env_workflow.outputs.AZ_CONTAINER_NAME}}
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
