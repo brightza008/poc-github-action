@@ -29,7 +29,7 @@ jobs:
     needs: env_workflow
     if: contains(github.event.commits[0].message, 'hub')
     name: "Build Docker to dockerhub"
-    uses: brightza008/poc-github-action/.github/workflows/docker-build.yaml@workflow
+    uses: brightza008/poc-github-workflow/.github/workflows/docker-build.yaml@workflow
     with:
       username: ${{ needs.env_workflow.outputs.user }}
       # username: ${{vars.MY_DOCKER_USERNAME}}
@@ -40,7 +40,7 @@ jobs:
   Setup_AZ_Reources:
     if: contains(github.event.commits[0].message, 'login')
     name: "Azure login"
-    uses: brightza008/poc-github-action/.github/workflows/az-authen.yaml@workflow
+    uses: brightza008/poc-github-workflow/.github/workflows/az-authen.yaml@workflow
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }} 
 
@@ -48,7 +48,7 @@ jobs:
   Build_Docker_ACR:
     if: contains(github.event.commits[0].message, 'az')
     name: "Build Docker to ACR"
-    uses: brightza008/poc-github-action/.github/workflows/docker-build-acr.yaml@workflow
+    uses: brightza008/poc-github-workflow/.github/workflows/docker-build-acr.yaml@workflow
  
   setup-up-azure-resources:
     if: contains(github.event.commits[0].message, 'az')
