@@ -32,10 +32,11 @@ jobs:
       # token: ${{ needs.env_workflow.outputs.pass }}
       token: ${{secrets.MY_DOCKER_PASSWORD}}
 
-  # Setup_AZ_Reources:
-  #   if: contains(github.event.commits[0].message, 'az')
-  #   name: "Azure login"
-  #   uses: brightza008/poc-github-action/.github/workflows/az-authen.yaml@workflow
+  Setup_AZ_Reources:
+    if: contains(github.event.commits[0].message, 'az')
+    name: "Azure login"
+    uses: brightza008/poc-github-action/.github/workflows/az-authen.yaml@workflow
+
   setup-up-azure-resources:
     if: contains(github.event.commits[0].message, 'az')
     runs-on: ubuntu-latest
@@ -44,6 +45,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
   Build_Docker_ACR:
     if: contains(github.event.commits[0].message, 'az')
     name: "Build Docker to ACR"
