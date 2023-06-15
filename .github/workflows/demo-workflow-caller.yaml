@@ -80,5 +80,5 @@ jobs:
         run: |
           docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
           docker tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }} ${{env.AZ_CONTAINER_NAME}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
-          docker push ${{env.AZ_CONTAINER_NAME}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
+          docker push ${{env.AZ_CONTAINER_REGISTRY}}/${{env.AZ_CONTAINER_NAME}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
  
