@@ -39,7 +39,7 @@ jobs:
 
   Setup_AZ_Reources:
     if: contains(github.event.commits[0].message, 'login')
-    name: "Azure login"
+    name: "Calling workflow Azure login"
     uses: brightza008/poc-github-workflow/.github/workflows/az-authen.yaml@workflow
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
@@ -49,39 +49,44 @@ jobs:
     if: contains(github.event.commits[0].message, 'az')
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-workflow/.github/workflows/docker-build-acr.yaml@workflow
- 
-  setup-up-azure-resources:
-    if: contains(github.event.commits[0].message, 'az')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
+    with:
+      AZ_CONTAINER_REGISTRY: ${{env.AZ_CONTAINER_REGISTRY}}
+      AZ_CONTAINER_NAME: ${{env.AZ_CONTAINER_NAME}}
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  # Reuse-workflow-main:
+  #   if: contains(github.event.commits[0].message, 'az')
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v3
 
-      - name: get properties
-        id: json_properties
-        run: |
-          echo "RELEASE_TAG=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
-      - run: |
-          echo "Build tag==> ${{ steps.json_properties.outputs.RELEASE_TAG }}"
+  #     - name: Azure login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #     - name: get properties
+  #       id: json_properties
+  #       run: |
+  #         echo "RELEASE_TAG=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
+  #     - run: |
+  #         echo "Build tag==> ${{ steps.json_properties.outputs.RELEASE_TAG }}"
+
+  #     - name: Azure login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
           
-      - name: start docker login
-        run: |
-          az acr login -n ${{env.AZ_CONTAINER_NAME}}
+  #     - name: start docker login
+  #       run: |
+  #         az acr login -n ${{env.AZ_CONTAINER_NAME}}
 
-      ## Build dockerfile ##
-      - name: Build the Docker image
-        run: |
-          docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
-          docker tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }} ${{env.AZ_CONTAINER_REGISTRY}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
-          docker push ${{env.AZ_CONTAINER_REGISTRY}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
+  #     ## Build dockerfile ##
+  #     - name: Build the Docker image
+  #       run: |
+  #         docker build . --file Dockerfile --tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
+  #         docker tag ${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }} ${{env.AZ_CONTAINER_REGISTRY}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
+  #         docker push ${{env.AZ_CONTAINER_REGISTRY}}/${{ github.event.repository.name }}:${{ steps.json_properties.outputs.RELEASE_TAG }}
  
