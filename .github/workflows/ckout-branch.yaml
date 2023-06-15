@@ -3,7 +3,7 @@ on:
   push:
     branches: [ action-ci ]
     paths:
-      - .github/workflows/ckput-branch.yaml
+      - .github/workflows/ckout-branch.yaml
 
 jobs:
   helm-deploy:
