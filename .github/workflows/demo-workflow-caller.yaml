@@ -10,6 +10,10 @@ env:
     docker_user: ${{vars.MY_DOCKER_USERNAME}}
     docker_password: ${{secrets.MY_DOCKER_PASSWORD}}
 
+    AZ_CONTAINER_REGISTRY: bbbacr.azurecr.io
+    AZ_CONTAINER_NAME: bbbacr
+  
+
 jobs:
   env_workflow:
     runs-on: ubuntu-latest
