@@ -73,4 +73,4 @@ jobs:
       HELM_TEMPLATE_BRANCH: ${{needs.env_workflow.outputs.HELM_TEMPLATE_BRANCH}}
       AZ_RESOURCE_GROUP: better-mite-rg
       AZ_AKS_NAME: better-mite-aks
-    secrets: inherit
+    secrets: inherit 
