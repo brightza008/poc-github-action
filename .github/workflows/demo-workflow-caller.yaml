@@ -13,7 +13,7 @@ env:
     AZ_CONTAINER_REGISTRY: bbbacr.azurecr.io
     AZ_CONTAINER_NAME: bbbacr
 
-    HELM_TEMPLATE_REPO: brightza008/poc-helmchart@minikube
+    HELM_TEMPLATE_REPO: brightza008/poc-helmchart
     HELM_TEMPLATE_BRANCH: minikube
 
 jobs:
