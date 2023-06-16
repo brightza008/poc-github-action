@@ -42,7 +42,7 @@ jobs:
       # username: ${{vars.MY_DOCKER_USERNAME}}
     secrets:
       # token: ${{ needs.env_workflow.outputs.pass }}
-      token: ${{secrets.MY_DOCKER_PASSWORD}}
+      token: ${{secrets.MY_DOCKER_PASSWORD}} 
  
   Setup_AZ_Reources:
     if: contains(github.event.commits[0].message, 'login')
