@@ -43,7 +43,7 @@ jobs:
     secrets:
       # token: ${{ needs.env_workflow.outputs.pass }}
       token: ${{secrets.MY_DOCKER_PASSWORD}}
-
+ 
   Setup_AZ_Reources:
     if: contains(github.event.commits[0].message, 'login')
     name: "Calling workflow Azure login"
