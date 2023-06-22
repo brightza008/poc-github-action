@@ -20,20 +20,6 @@ env:
     BLOB_CONTAINER_NAME: chart
 
 jobs:
-
-  # Set-properties:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository code
-  #       uses: actions/checkout@v3
-
-  #     - name: get properties
-  #       id: json_properties
-  #       run: |
-  #         echo "RELEASE_TAG=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
-  #     - run: |
-  #         echo "Build tag==> ${{ steps.json_properties.outputs.RELEASE_TAG }}"
-
   env_workflow:
     runs-on: ubuntu-latest
     name: Setup Output Env
@@ -89,13 +75,12 @@ jobs:
 
   Helm_Build_Chart:
     needs: [env_workflow,Build_Docker_ACR]
-    if: contains(github.event.commits[0].message, 'hb')
+    if: contains(github.event.commits[0].message, 'bbb')
     name: "Helm Build Chart to Blob storage"
     uses: brightza008/poc-github-workflow/.github/workflows/helm-build-chart.yaml@workflow
     with:
       HELM_TEMPLATE_REPO: ${{needs.env_workflow.outputs.HELM_TEMPLATE_REPO}}
       HELM_TEMPLATE_BRANCH: ${{needs.env_workflow.outputs.HELM_TEMPLATE_BRANCH}}
-
       AZURE_STORAGE_ACC_NAME: ${{needs.env_workflow.outputs.BLOB_STORAGE_ACC}}
       AZURE_CONTAINER_NAME: ${{needs.env_workflow.outputs.BLOB_CONTAINER_NAME}}
       APP_NAME: ${{github.event.repository.name}}
