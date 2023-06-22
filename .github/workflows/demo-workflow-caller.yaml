@@ -73,7 +73,7 @@ jobs:
     steps:
       - run: |
           echo ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }}\
-
+ 
   Helm_Build_Chart:
     needs: [env_workflow,Build_Docker_ACR]
     if: contains(github.event.commits[0].message, 'bbb')
