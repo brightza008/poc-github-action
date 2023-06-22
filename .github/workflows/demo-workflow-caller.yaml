@@ -80,7 +80,13 @@ jobs:
       AZ_CONTAINER_REGISTRY: ${{needs.env_workflow.outputs.AZ_CONTAINER_REGISTRY}}
       AZ_CONTAINER_NAME: ${{needs.env_workflow.outputs.AZ_CONTAINER_NAME}}
     secrets: inherit # pass all secrets into reuse-workflow
-  
+
+  TEST_CALL_OUTPUT:
+    runs-on: ubuntu-latest
+    needs: Build_Docker_ACR
+    steps:
+      - run: echo ${{ needs.Build_Docker_ACR.outputs.RELEASE_TAG }}
+
   Helm_Build_Chart:
     needs: [env_workflow,Build_Docker_ACR]
     if: contains(github.event.commits[0].message, 'bbb')
@@ -95,7 +101,8 @@ jobs:
       APP_NAME: ${{github.event.repository.name}}
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.RELEASE_TAG }} # use the output (app version) from docker-build-acr.yaml
     secrets: inherit # pass all secrets into reuse-workflow
-    
+
+
 
 
   Deploy_helm:
