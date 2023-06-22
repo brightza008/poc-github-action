@@ -91,6 +91,7 @@ jobs:
       AZURE_CONTAINER_NAME: ${{needs.env_workflow.outputs.BLOB_CONTAINER_NAME}}
       APP_NAME: ${{github.event.repository.name}}
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.RELEASE_TAG }} # use the output (app version) from docker-build-acr.yaml
+    secrets: inherit # pass all secrets into reuse-workflow
     
 
 
