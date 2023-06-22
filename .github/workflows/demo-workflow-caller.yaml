@@ -85,11 +85,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: Build_Docker_ACR
     steps:
-      - run: echo ${{ needs.Build_Docker_ACR.outputs.RELEASE_TAG }}
+      - run: echo ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }}
 
   Helm_Build_Chart:
     needs: [env_workflow,Build_Docker_ACR]
-    if: contains(github.event.commits[0].message, 'bbb')
+    if: contains(github.event.commits[0].message, 'hb')
     name: "Helm Build Chart to Blob storage"
     uses: brightza008/poc-github-workflow/.github/workflows/helm-build-chart.yaml@workflow
     with:
@@ -99,7 +99,7 @@ jobs:
       AZURE_STORAGE_ACC_NAME: ${{needs.env_workflow.outputs.BLOB_STORAGE_ACC}}
       AZURE_CONTAINER_NAME: ${{needs.env_workflow.outputs.BLOB_CONTAINER_NAME}}
       APP_NAME: ${{github.event.repository.name}}
-      APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.RELEASE_TAG }} # use the output (app version) from docker-build-acr.yaml
+      APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }} # use the output (app version) from docker-build-acr.yaml
     secrets: inherit # pass all secrets into reuse-workflow
 
 
