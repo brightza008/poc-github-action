@@ -17,7 +17,7 @@ env:
     HELM_TEMPLATE_BRANCH: minikube
     # Azure Blob Stotage 
     BLOB_STORAGE_ACC: muzikzzacc
-    BLOB_CONTAINER_NAME: chart
+    BLOB_CONTAINER_NAME: charts
 
 jobs:
   env_workflow:
