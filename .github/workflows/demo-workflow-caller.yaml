@@ -56,7 +56,6 @@ jobs:
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
-
   Build_Docker_ACR:
     needs: env_workflow
     if: contains(github.event.commits[0].message, 'bbb')
