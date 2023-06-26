@@ -86,7 +86,7 @@ jobs:
       APP_NAME: ${{github.event.repository.name}}
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }} # use the output (app version) from docker-build-acr.yaml
     secrets: inherit # pass all secrets into reuse-workflow
-
+ 
   Deploy_helm:
     needs: [env_workflow] 
     if: contains(github.event.commits[0].message, 'de')
