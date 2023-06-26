@@ -100,4 +100,4 @@ jobs:
       AZ_RESOURCE_GROUP: bright-rg
       AZ_AKS_NAME: bright-aks
     secrets: inherit 
-      
+       
