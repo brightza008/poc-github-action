@@ -95,6 +95,6 @@ jobs:
     with:
       HELM_TEMPLATE_REPO: ${{needs.env_workflow.outputs.HELM_TEMPLATE_REPO}}
       HELM_TEMPLATE_BRANCH: ${{needs.env_workflow.outputs.HELM_TEMPLATE_BRANCH}}
-      AZ_RESOURCE_GROUP: brightza008-rg
-      AZ_AKS_NAME: brightza008-aks
+      AZ_RESOURCE_GROUP: bright-rg
+      AZ_AKS_NAME: bright-aks
     secrets: inherit 
