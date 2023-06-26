@@ -87,7 +87,7 @@ jobs:
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }} # use the output (app version) from docker-build-acr.yaml
     secrets: inherit # pass all secrets into reuse-workflow
  
-  Deploy_helm:
+  Deploy_helm:  ## now use Helm values form https://github.com/brightza008/poc-helmchart.git
     needs: [env_workflow,Helm_Build_Chart] 
     if: contains(github.event.commits[0].message, 'bbb')
     name: "Helm deploy to AKS"
@@ -100,4 +100,4 @@ jobs:
       AZ_RESOURCE_GROUP: bright-rg
       AZ_AKS_NAME: bright-aks
     secrets: inherit 
-   
+    
