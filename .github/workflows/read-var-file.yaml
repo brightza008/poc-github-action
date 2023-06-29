@@ -25,7 +25,8 @@ jobs:
     needs: set-env-fromJson
     steps:
       - name: echo env from GITHUB_ENV
-        run : echo vbvb
+        run : |
+            echo vbvb
     #   - run: |
     #         echo "123"
     #         #env
