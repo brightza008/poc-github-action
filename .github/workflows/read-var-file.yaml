@@ -19,3 +19,11 @@ jobs:
             env
             echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
             echo "env: ${{env.AZ_CONTAINER_REGISTRY}}"
+
+  job-call:
+    runs-on: ubuntu-latest
+    needs: set-env-fromJson
+    steps:
+      - name: echo env from GITHUB_ENV
+        run: |
+            echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
