@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: echo env from GITHUB_ENV
         run : echo vbvb
-      - run: |
-            echo "123"
-            #env
-            # echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
+    #   - run: |
+    #         echo "123"
+    #         #env
+    #         # echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
