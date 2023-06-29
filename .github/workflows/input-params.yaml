@@ -19,6 +19,11 @@ on:
         description: Include 🎉🤣 emojis
       environment:
         type: environment
+  push:
+    branches:
+      - action-ci
+    paths:
+      - .github/workflows/input-params.yaml
 
 jobs:
   greet:
