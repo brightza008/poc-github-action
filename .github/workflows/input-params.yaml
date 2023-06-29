@@ -2,12 +2,6 @@ name: Mixed inputs
 
 
 on:
-  push:
-    branches:
-      - action-ci
-    paths:
-      - .github/workflows/input-params.yaml
-
   workflow_dispatch:
     inputs:
       name:
