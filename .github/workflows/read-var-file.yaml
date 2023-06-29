@@ -8,7 +8,7 @@ on:
 
 jobs:
   set-env-fromJson:
-    runs-on: ubuntu-latest
+    runs-on: my-mac
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
             echo "env: ${{env.CONFIG_JSON}}"
 
   job-call:
-    runs-on: ubuntu-latest
+    runs-on: my-mac
     needs: set-env-fromJson
     steps:
       - name: echo env from GITHUB_ENV
