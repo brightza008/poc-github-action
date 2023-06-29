@@ -1,6 +1,4 @@
 name: Mixed inputs
-
-
 on:
   workflow_dispatch:
     inputs:
@@ -25,3 +23,14 @@ jobs:
     steps:
     - name: Send greeting
       run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
+
+    - name: Check approval status
+      run: |
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          if [[ "${{ github.event.inputs.approval }}" == "approve" ]]; then
+            echo "Workflow approved, continue with CI processes."
+          else
+            echo "Workflow not approved, stopping CI processes."
+            exit 1
+          fi
+        fi
