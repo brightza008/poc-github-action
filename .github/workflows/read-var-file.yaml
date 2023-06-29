@@ -28,7 +28,6 @@ jobs:
         run : |
             echo vbvb
             env
-            echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
     #   - run: |
     #         echo "123"
     #         #env
