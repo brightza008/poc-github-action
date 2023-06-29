@@ -6,6 +6,8 @@ on:
     paths:
       - .github/workflows/read-var-file.yaml
 
+# env:
+#     VARIABLE: 
 jobs:
   set-env-fromJson:
     runs-on: ubuntu-latest
@@ -24,6 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: set-env-fromJson
     steps:
-      - name: echo env from GITHUB_ENV
+      - name: check variable from setting
         run : |
-            echo "variable: ${{ fromJson(env.JSON).AZ_CONTAINER_NAME }}"
+            echo "variable: ${{ fromJson(vars.JSON).AZ_CONTAINER_NAME }}"
