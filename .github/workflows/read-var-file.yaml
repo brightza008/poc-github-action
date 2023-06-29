@@ -7,17 +7,15 @@ on:
       - .github/workflows/read-var-file.yaml
 
 jobs:
-  helm-deploy:
+  set-env-fromJson:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
 
       - run: |
-            echo 'CONFIG_JSON<<EOF' >> $GITHUB_ENV
-            cat ./config-var.json >> $GITHUB_ENV
-            echo 'EOF' >> $GITHUB_ENV
+            echo "CONFIG_JSON=$(jq -c . < read-var-file.json)" >> $GITHUB_ENV
       - run: |
             env
-            echo ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}
-            echo ${{env.AZ_CONTAINER_REGISTRY}}
+            echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
+            echo "env: ${{env.AZ_CONTAINER_REGISTRY}}"
