@@ -8,7 +8,7 @@ on:
 
 jobs:
   set-env-fromJson:
-    runs-on: my-mac
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -21,14 +21,9 @@ jobs:
             echo "env: ${{env.CONFIG_JSON}}"
 
   job-call:
-    runs-on: my-mac
+    runs-on: ubuntu-latest
     needs: set-env-fromJson
     steps:
       - name: echo env from GITHUB_ENV
         run : |
-            echo vbvb
-            env
-    #   - run: |
-    #         echo "123"
-    #         #env
-    #         # echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
+            echo "variable: ${{ fromJson(env.JSON).AZ_CONTAINER_NAME }}"
