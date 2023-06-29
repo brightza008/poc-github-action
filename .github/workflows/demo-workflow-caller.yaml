@@ -7,6 +7,7 @@ on:
       - .github/workflows/demo-workflow-caller.yaml
 
 env: 
+    PackageName: ${{github.event.repository.name}}
     docker_user: ${{vars.MY_DOCKER_USERNAME}}
     docker_password: ${{secrets.MY_DOCKER_PASSWORD}}
     # ACR
@@ -58,10 +59,11 @@ jobs:
 
   Build_Docker_ACR:
     needs: env_workflow
-    if: contains(github.event.commits[0].message, 'bbb')
+    if: contains(github.event.commits[0].message, 'acr')
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-workflow/.github/workflows/docker-build-acr.yaml@workflow
     with:
+      APP_NAME: ${{env.PackageName}}
       AZ_CONTAINER_REGISTRY: ${{needs.env_workflow.outputs.AZ_CONTAINER_REGISTRY}}
       AZ_CONTAINER_NAME: ${{needs.env_workflow.outputs.AZ_CONTAINER_NAME}}
     secrets: inherit # pass all secrets into reuse-workflow
