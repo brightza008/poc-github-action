@@ -1,0 +1,11 @@
+
+    {
+        "AZ_CONTAINER_REGISTRY": "bbbacr.azurecr.io",
+        "AZ_CONTAINER_NAME": "bbbacr",
+
+        "HELM_TEMPLATE_REPO": "brightza008/poc-helmchart",
+        "HELM_TEMPLATE_BRANCH": "minikube",
+
+        "BLOB_STORAGE_ACC": "muzikzzacc",
+        "BLOB_CONTAINER_NAME": "charts"
+    }

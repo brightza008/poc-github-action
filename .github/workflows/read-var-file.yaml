@@ -1,0 +1,23 @@
+name: POC_read_json
+on: 
+  workflow_dispatch:
+  push:
+    branches: [ action-ci ]
+    paths:
+      - .github/workflows/read-var-file.yaml
+
+jobs:
+  helm-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: |
+            echo 'CONFIG_JSON<<EOF' >> $GITHUB_ENV
+            cat ./config-var.json >> $GITHUB_ENV
+            echo 'EOF' >> $GITHUB_ENV
+      - run: |
+            env
+            echo ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}
+            echo ${{env.AZ_CONTAINER_REGISTRY}}
