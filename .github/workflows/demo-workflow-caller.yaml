@@ -27,7 +27,7 @@ jobs:
     outputs: 
       user: ${{env.docker_user}}
       pass: ${{env.docker_password}}
-
+      PackageName: ${{env.PackageName}}
       AZ_CONTAINER_REGISTRY: ${{env.AZ_CONTAINER_REGISTRY}}
       AZ_CONTAINER_NAME: ${{env.AZ_CONTAINER_NAME}}
       HELM_TEMPLATE_REPO: ${{env.HELM_TEMPLATE_REPO}}
@@ -63,7 +63,7 @@ jobs:
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-workflow/.github/workflows/docker-build-acr.yaml@workflow
     with:
-      APP_NAME: ${{env.PackageName}}
+      APP_NAME: ${{needs.env_workflow.outputs.PackageName}}
       AZ_CONTAINER_REGISTRY: ${{needs.env_workflow.outputs.AZ_CONTAINER_REGISTRY}}
       AZ_CONTAINER_NAME: ${{needs.env_workflow.outputs.AZ_CONTAINER_NAME}}
     secrets: inherit # pass all secrets into reuse-workflow
