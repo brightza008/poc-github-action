@@ -2,7 +2,7 @@ name: Mixed inputs
 on:
   workflow_dispatch:
     inputs:
-      approval:
+      approval: 
         type: string
         default: approve
         required: true
