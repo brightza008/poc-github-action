@@ -1,14 +1,21 @@
 name: Mixed inputs
 
+
 on:
+  push:
+    branches:
+      - action-ci
+    paths:
+      - .github/workflows/input-params.yaml
+
   workflow_dispatch:
     inputs:
       name:
         type: choice
         description: Who to greet
         options: 
-        - monalisa
-        - cschleiden
+        - bboy
+        - ggirl
       message:
         required: true
       use-emoji:
