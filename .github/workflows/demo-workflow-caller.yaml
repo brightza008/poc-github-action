@@ -17,6 +17,8 @@ env:
     #HELM repo
     HELM_TEMPLATE_REPO: brightza008/poc-helmchart
     HELM_TEMPLATE_BRANCH: minikube
+    HELM_VALUES_REPO: brightza008/helm-values
+    HELM_VALUES_BRANCH: main
     # Azure Blob Stotage 
     BLOB_STORAGE_ACC: muzikzzacc
     BLOB_CONTAINER_NAME: charts
@@ -33,6 +35,8 @@ jobs:
       AZ_CONTAINER_NAME: ${{env.AZ_CONTAINER_NAME}}
       HELM_TEMPLATE_REPO: ${{env.HELM_TEMPLATE_REPO}}
       HELM_TEMPLATE_BRANCH: ${{env.HELM_TEMPLATE_BRANCH}}
+      HELM_VALUES_REPO: ${{env.HELM_VALUES_REPO}}
+      HELM_VALUES_BRANCH: ${{env.HELM_VALUES_BRANCH}}
       BLOB_STORAGE_ACC: ${{env.BLOB_STORAGE_ACC}}
       BLOB_CONTAINER_NAME: ${{env.BLOB_CONTAINER_NAME}}
     steps:
