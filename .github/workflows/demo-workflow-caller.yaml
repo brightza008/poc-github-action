@@ -102,8 +102,8 @@ jobs:
     with:
       APP_NAME: ${{github.event.repository.name}}
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }}
-      HELM_VALUES_REPO: ${{needs.env_workflow.outputs.HELM_TEMPLATE_REPO}}
-      HELM_VALUES_BRANCH: ${{needs.env_workflow.outputs.HELM_TEMPLATE_BRANCH}}
+      HELM_VALUES_REPO: ${{needs.env_workflow.outputs.HELM_VALUES_REPO}}
+      HELM_VALUES_BRANCH: ${{needs.env_workflow.outputs.HELM_VALUES_BRANCH}}
       AKS_RESOURCE_GROUP: bright-rg
       AKS_NAME: bright-aks
     secrets: inherit 
