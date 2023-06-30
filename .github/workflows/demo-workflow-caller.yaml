@@ -59,7 +59,7 @@ jobs:
 
   Build_Docker_ACR:
     needs: env_workflow
-    if: contains(github.event.commits[0].message, 'acr')
+    if: contains(github.event.commits[0].message, 'bbb')
     name: "Build Docker to ACR"
     uses: brightza008/poc-github-workflow/.github/workflows/docker-build-acr.yaml@workflow
     with:
