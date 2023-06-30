@@ -1,6 +1,7 @@
 name: POC-reuse-workflow
 #run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
+  workflow_dispatch:
   push:
     branches: [ action-ci ]
     paths:
