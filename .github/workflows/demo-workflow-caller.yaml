@@ -99,7 +99,7 @@ jobs:
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }}
       HELM_VALUES_REPO: ${{needs.env_workflow.outputs.HELM_TEMPLATE_REPO}}
       HELM_VALUES_BRANCH: ${{needs.env_workflow.outputs.HELM_TEMPLATE_BRANCH}}
-      AZ_RESOURCE_GROUP: bright-rg
-      AZ_AKS_NAME: bright-aks
+      AKS_RESOURCE_GROUP: bright-rg
+      AKS_NAME: bright-aks
     secrets: inherit 
       
