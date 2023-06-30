@@ -7,7 +7,7 @@ on:
     paths:
       - .github/workflows/demo-workflow-caller.yaml
 
-env: 
+env:  
     PackageName: ${{github.event.repository.name}}
     docker_user: ${{vars.MY_DOCKER_USERNAME}}
     docker_password: ${{secrets.MY_DOCKER_PASSWORD}}
