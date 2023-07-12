@@ -21,7 +21,7 @@ jobs:
             env
             echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
             echo "env: ${{env.CONFIG_JSON}}"
-
+ 
   job-call:
     runs-on: ubuntu-latest
     needs: set-env-fromJson
