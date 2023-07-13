@@ -16,6 +16,14 @@ jobs:
     vault-preparation:
         runs-on: ubuntu-latest
         steps:
+            - name: vaultcli-installation
+              run: |
+                curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+                apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+                apt update
+                apt install vault -y
+                vault --version
+                
             - name: prepare data
               run: | 
                   export VAULT_ADDR=${vault_addr}
