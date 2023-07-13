@@ -1,4 +1,4 @@
-name: POC_checkout
+name: POC_sandbox_authen
 on: 
   push:
     branches: [ action-ci ]
@@ -13,15 +13,16 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Az CLI login'
-        uses: azure/login@v1
-        with:
-        #   client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: 8b41a058-9ec4-4f21-8450-44bf843a0b44
-          subscription-id: 6722572a-c1d9-47d5-a6cf-765f7ad9c6d2
+    #   - name: 'Az CLI login'
+    #     uses: azure/login@v1
+    #     with:
+    #     #   client-id: ${{ secrets.AZURE_CLIENT_ID }}
+    #       tenant-id: 8b41a058-9ec4-4f21-8450-44bf843a0b44
+    #       subscription-id: 6722572a-c1d9-47d5-a6cf-765f7ad9c6d2
   
       - name: 'Run az commands'
         run: |
-          az account show
-          az group list
-          pwd 
+            az login --tenant 8b41a058-9ec4-4f21-8450-44bf843a0b44
+            az account show
+            az group list
+            pwd 
