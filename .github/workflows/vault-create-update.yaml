@@ -28,8 +28,7 @@ jobs:
             - name: prepare data
               run: | 
                   export VAULT_ADDR=${vault_addr}
-                  export VAULT_DEV_ROOT_TOKEN_ID=${vault_token}
-                  vault login
+                  export VAULT_TOKEN=${vault_token}
                   vault kv put secret/test ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
                   vault kv get secret/test
 
