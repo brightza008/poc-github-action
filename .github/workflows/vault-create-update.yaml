@@ -29,6 +29,7 @@ jobs:
               run: | 
                   export VAULT_ADDR=${vault_addr}
                   export VAULT_DEV_ROOT_TOKEN_ID=${vault_token}
+                  vault login
                   vault kv put secret/test ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
                   vault kv get secret/test
 
