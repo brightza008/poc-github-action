@@ -43,10 +43,11 @@ jobs:
                 token: ${{ secrets.VAULT_TOKEN }}
                 tlsSkipVerify: true
                 secrets: |
-                    secret/data/test ${{inputs.VAULT_KEY}} | ${{inputs.VAULT_KEY}}
+                    secret/data/test ${{inputs.VAULT_KEY}} 
 
             - name: reteive the secret from vault
               run : |
-                  echo ${{env.inputs.VAULT_KEY}}
+                  username = "${{inputs.VAULT_KEY}} "
+                  echo $username
 
 
