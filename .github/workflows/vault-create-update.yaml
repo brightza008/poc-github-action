@@ -5,10 +5,10 @@ on:
     inputs:
         VAULT_KEY: 
           type: string
-          required: true
+        #   required: true
         VAULT_SECRET: 
           type: string
-          required: true
+        #   required: true
 
 env:
     vault_addr: http://4.194.34.125:8200
