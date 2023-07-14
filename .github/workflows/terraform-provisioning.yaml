@@ -49,6 +49,7 @@ jobs:
                 cd ${{inputs.terraform-folder}}
                 terraform destroy --auto-approve
             else
+                terraform init
                 terraform plan
             fi
           fi
