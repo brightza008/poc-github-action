@@ -43,6 +43,6 @@ jobs:
                 token: ${{ secrets.VAULT_TOKEN }}
                 # caCertificate: ${{ secrets.VAULT_CA_CERT }}
                 secrets: |
-                    secret/test/aws accessKey | AWS_ACCESS_KEY_ID ;
-                    secret/test/awsaws secretKey | AWS_SECRET_ACCESS_KEY ;
-                    secret/test/aws npm_token
+                    secret/test accessKey | AWS_ACCESS_KEY_ID ;
+                    secret/test secretKey | AWS_SECRET_ACCESS_KEY ;
+                    secret/test npm_token
