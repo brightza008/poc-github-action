@@ -14,8 +14,8 @@ on:
       action:
         type: choice
         description: Make a choice
-        default: plan
         options:
+        - plan
         - apply
         - destroy
 
