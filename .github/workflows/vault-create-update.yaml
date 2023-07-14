@@ -37,17 +37,17 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Import Secrets
+              id: get-secrets
               uses: hashicorp/vault-action@v2
               with:
                 url: http://4.194.34.125:8200
                 token: ${{ secrets.VAULT_TOKEN }}
                 tlsSkipVerify: true
                 secrets: |
-                    secret/data/test ${{inputs.VAULT_KEY}} 
+                    secret/data/test ${{inputs.VAULT_KEY}} | ${{inputs.VAULT_KEY}}
 
             - name: reteive the secret from vault
               run : |
-                  #username = "${{inputs.VAULT_KEY}} "
-                  echo ${{inputs.VAULT_KEY}}
+                  echo "${{ steps.get-secrets.outputs.inputs.VAULT_KEY }}"
 
 
