@@ -32,7 +32,7 @@ jobs:
                   vault kv put secret/test ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
                   vault kv get secret/test
 
-    vault-hashicorp-workflow:
+    reteive-vault-hashicorp-workflow:
         needs: vault-import
         runs-on: ubuntu-latest
         steps:
@@ -47,6 +47,6 @@ jobs:
 
             - name: reteive the secret from vault
               run : |
-                  echo ${{inputs.VAULT_KEY}}
+                  echo ${{env.VAULT_KEY}}
 
 
