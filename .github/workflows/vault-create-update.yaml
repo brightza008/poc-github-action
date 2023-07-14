@@ -43,6 +43,5 @@ jobs:
                 token: ${{ secrets.VAULT_TOKEN }}
                 tlsSkipVerify: true
                 secrets: |
-                    secret/data/test accessKey | AWS_ACCESS_KEY_ID ;
-                    secret/data/test secretKey | AWS_SECRET_ACCESS_KEY ;
+                    secret/data/test MY_DOCKER_USERNAME | MY_DOCKER_USERNAME ;
                     secret/data/test npm_token
