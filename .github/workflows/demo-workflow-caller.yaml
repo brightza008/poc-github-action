@@ -11,17 +11,21 @@ env:
     PackageName: ${{github.event.repository.name}}
     docker_user: ${{vars.MY_DOCKER_USERNAME}}
     docker_password: ${{secrets.MY_DOCKER_PASSWORD}}
+
     # ACR
-    AZ_CONTAINER_REGISTRY: bbbacr.azurecr.io
-    AZ_CONTAINER_NAME: bbbacr
+    AZ_CONTAINER_REGISTRY: ${{ fromJson(vars.JSON).AZ_CONTAINER_REGISTRY }}
+    AZ_CONTAINER_NAME: ${{ fromJson(vars.JSON).AZ_CONTAINER_NAME }}
     #HELM repo
-    HELM_TEMPLATE_REPO: brightza008/poc-helmchart
-    HELM_TEMPLATE_BRANCH: minikube
-    HELM_VALUES_REPO: brightza008/helm-values
-    HELM_VALUES_BRANCH: main
+    HELM_TEMPLATE_REPO: ${{ fromJson(vars.JSON).HELM_TEMPLATE_REPO }}
+    HELM_TEMPLATE_BRANCH: ${{ fromJson(vars.JSON).HELM_TEMPLATE_BRANCH }}
+    HELM_VALUES_REPO: ${{ fromJson(vars.JSON).HELM_VALUES_REPO }}
+    HELM_VALUES_BRANCH: ${{ fromJson(vars.JSON).HELM_VALUES_BRANCH }}
     # Azure Blob Stotage 
-    BLOB_STORAGE_ACC: muzikzzacc
-    BLOB_CONTAINER_NAME: charts
+    BLOB_STORAGE_ACC: ${{ fromJson(vars.JSON).BLOB_STORAGE_ACC }}
+    BLOB_CONTAINER_NAME: ${{ fromJson(vars.JSON).BLOB_CONTAINER_NAME }}
+    # AKS
+    AKS_RESOURCE_GROUP: ${{ fromJson(vars.JSON).AKS_RESOURCE_GROUP }}
+    AKS_NAME: ${{ fromJson(vars.JSON).AKS_NAME }}
 
 jobs:
   env_workflow:
@@ -39,6 +43,8 @@ jobs:
       HELM_VALUES_BRANCH: ${{env.HELM_VALUES_BRANCH}}
       BLOB_STORAGE_ACC: ${{env.BLOB_STORAGE_ACC}}
       BLOB_CONTAINER_NAME: ${{env.BLOB_CONTAINER_NAME}}
+      AKS_RESOURCE_GROUP: ${{ env.AKS_RESOURCE_GROUP }}
+      AKS_NAME: ${{ env.AKS_NAME }}
     steps:
       - run: |
           echo "preparing output env"
@@ -104,7 +110,8 @@ jobs:
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }}
       HELM_VALUES_REPO: ${{needs.env_workflow.outputs.HELM_VALUES_REPO}}
       HELM_VALUES_BRANCH: ${{needs.env_workflow.outputs.HELM_VALUES_BRANCH}}
-      AKS_RESOURCE_GROUP: bright-rg
-      AKS_NAME: bright-aks
+      AKS_RESOURCE_GROUP: ${{needs.env_workflow.outputs.AKS_RESOURCE_GROUP}}
+      AKS_NAME: ${{needs.env_workflow.outputs.AKS_NAME}}
+      AZURE_STORAGE_ACC_NAME: ${{needs.env_workflow.outputs.BLOB_STORAGE_ACC}}
     secrets: inherit 
-       
+        
