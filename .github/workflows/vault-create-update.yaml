@@ -43,5 +43,5 @@ jobs:
                 token: ${{ secrets.VAULT_TOKEN }}
                 tlsSkipVerify: true
                 secrets: |
-                    secret/data/test MY_DOCKER_USERNAME | MY_DOCKER_USERNAME ;
+                    secret/data/test MY_DOCKER_USERNAME=pung ;
                     secret/data/test npm_token
