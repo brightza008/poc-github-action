@@ -43,4 +43,4 @@ jobs:
                 token: ${{ secrets.VAULT_TOKEN }}
                 tlsSkipVerify: true
                 secrets: |
-                    secret/data/name MY_DOCKER_USERNAME | MY_DOCKER_USERNAME
+                    secret/data/test name | MY_DOCKER_USERNAME
