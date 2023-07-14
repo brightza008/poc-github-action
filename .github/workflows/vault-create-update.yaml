@@ -42,7 +42,11 @@ jobs:
                 url: http://4.194.34.125:8200
                 token: ${{ secrets.VAULT_TOKEN }}
                 # caCertificate: ${{ secrets.VAULT_CA_CERT }}
-                secrets: |
-                    secret/test accessKey | AWS_ACCESS_KEY_ID ;
-                    secret/test secretKey | AWS_SECRET_ACCESS_KEY ;
-                    secret/test npm_token
+#                 secrets: |
+#                     secret/test accessKey | AWS_ACCESS_KEY_ID ;
+#                     secret/test secretKey | AWS_SECRET_ACCESS_KEY ;
+#                     secret/test npm_token
+            - name: Step following 'Import Secrets'
+              run: |
+                ACCESS_KEY_ID = id
+                SECRET_ACCESS_KEY = pass
