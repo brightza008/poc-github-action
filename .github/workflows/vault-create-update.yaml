@@ -44,7 +44,8 @@ jobs:
                 tlsSkipVerify: true
                 secrets: |
                     secret/data/test name | MY_USER
-            - name: show Vault Secret
-                run:|
-                  echo $MY_USER
-            
+            - name: check variable from setting
+              run : |
+                  echo ${{env.MY_USER}}
+
+
