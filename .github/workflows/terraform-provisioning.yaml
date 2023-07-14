@@ -39,15 +39,16 @@ jobs:
 
       - name: Check approval status
         run: |
+
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             if [[ "${{ github.event.inputs.action }}" == "apply" ]]; then
-              cd ${{inputs.terraform-folder}}
-              terraform init
-              terraform apply --auto-approve
-            else if [[ "${{ github.event.inputs.action }}" == "destroy" ]]; then
-              cd ${{inputs.terraform-folder}}
-              terraform destroy
-            else 
-              terraform plan
+                cd ${{inputs.terraform-folder}}
+                terraform init
+                terraform apply --auto-approve
+            elif [[ "${{ github.event.inputs.action }}" == "destroy" ]]; then
+                cd ${{inputs.terraform-folder}}
+                terraform destroy --auto-approve
+            else
+                terraform plan
             fi
           fi
