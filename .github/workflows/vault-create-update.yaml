@@ -47,6 +47,6 @@ jobs:
 
             - name: reteive the secret from vault
               run : |
-                  echo ${{env.VAULT_KEY}}
+                  echo ${{env.inputs.VAULT_KEY}}
 
 
