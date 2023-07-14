@@ -41,8 +41,8 @@ jobs:
         run: |
 
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          cd ${{inputs.terraform-folder}}
             if [[ "${{ github.event.inputs.action }}" == "apply" ]]; then
-                cd ${{inputs.terraform-folder}}
                 terraform init
                 terraform apply --auto-approve
             elif [[ "${{ github.event.inputs.action }}" == "destroy" ]]; then
