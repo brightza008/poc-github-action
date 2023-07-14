@@ -47,7 +47,7 @@ jobs:
 
             - name: reteive the secret from vault
               run : |
-                  username = "${{inputs.VAULT_KEY}} "
-                  echo $username
+                  #username = "${{inputs.VAULT_KEY}} "
+                  echo ${{inputs.VAULT_KEY}}
 
 
