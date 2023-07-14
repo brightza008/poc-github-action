@@ -61,7 +61,7 @@ jobs:
       # token: ${{ needs.env_workflow.outputs.pass }}
       token: ${{secrets.MY_DOCKER_PASSWORD}} 
  
-  Setup_AZ_Reources:
+  Setup_AZ_Reources: 
     if: contains(github.event.commits[0].message, 'login')
     name: "Calling workflow Azure login"
     uses: brightza008/poc-github-workflow/.github/workflows/az-authen.yaml@workflow
