@@ -29,14 +29,14 @@ jobs:
             repository: brightza008/terraform-ansible
             token: ${{ secrets.PAT }}
             ref: main
-
-
       - name: greet
         run: | 
-
           echo "boolean is ${{ github.event.inputs.action }}" / ${{ inputs.action }} 
           echo "choice is ${{ github.event.inputs.terraform-folder }}" / ${{ inputs.terraform-folder }}
-
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Check approval status
         run: |
 
