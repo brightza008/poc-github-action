@@ -40,7 +40,6 @@ jobs:
       - name: Check approval status
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-          az login --service-principal -u ca8f6a85-acf2-499e-9d92-2b56e8c6b13a -p 7v48Q~PA.yttVbW3~xQA5Uc-m6~c8dNtKkXpCb0L --tenant d2774ba6-35b5-4c03-aa0d-35ce15b9fbd7
           cd terraform/Azure/${{inputs.terraform-folder}}
             if [[ "${{ github.event.inputs.action }}" == "apply" ]]; then
                 terraform init
