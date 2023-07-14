@@ -5,47 +5,48 @@ on:
     inputs:
         VAULT_KEY: 
           type: string
-        #   required: true
+          required: true
         VAULT_SECRET: 
           type: string
-        #   required: true
+          required: true
 
 env:
     vault_addr: http://4.194.34.125:8200
-    vault_token: hvs.CAESIGwDu6hY36OfMYfGsgG2sWXYndvrltHTRhfPBfhKvdOBGh4KHGh2cy53NGE4YjBhUXZUYTZ6dEk2R3FLM1g3VTY
+    vault_token: ${{secrets.VAULT_TOKEN}}
 jobs:
-    # vault-preparation:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - name: vaultcli-installation
-    #           run: |
-    #             sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    #             sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    #             sudo apt update
-    #             sudo apt install vault -y
-    #             sudo vault --version
+    vault-import:
+        runs-on: ubuntu-latest
+        steps:
+            - name: vaultcli-installation
+              run: |
+                sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+                sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+                sudo apt update
+                sudo apt install vault -y
+                sudo vault --version
 
-    #         - name: prepare data
-    #           run: | 
-    #               export VAULT_ADDR=${vault_addr}
-    #               export VAULT_TOKEN=${vault_token}
-    #               vault kv put secret/test ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
-    #               vault kv get secret/test
+            - name: prepare data
+              run: | 
+                  export VAULT_ADDR=${vault_addr}
+                  export VAULT_TOKEN=${vault_token}
+                  vault kv put secret/test ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
+                  vault kv get secret/test
 
     vault-hashicorp-workflow:
+        needs: vault-import
         runs-on: ubuntu-latest
         steps:
             - name: Import Secrets
-              id: import-secrets
               uses: hashicorp/vault-action@v2
               with:
                 url: http://4.194.34.125:8200
                 token: ${{ secrets.VAULT_TOKEN }}
                 tlsSkipVerify: true
                 secrets: |
-                    secret/data/test name | MY_USER
-            - name: check variable from setting
+                    secret/data/test ${{inputs.VAULT_KEY}} | ${{inputs.VAULT_KEY}}
+
+            - name: reteive the secret from vault
               run : |
-                  echo ${{env.MY_USER}}
+                  echo ${{inputs.VAULT_KEY}}
 
 
