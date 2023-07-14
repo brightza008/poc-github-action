@@ -44,7 +44,7 @@ jobs:
               cd ${{inputs.terraform-folder}}
               terraform init
               terraform apply --auto-approve
-            else if [[ "${{ github.event.inputs.action }}" == "destroy" ]]
+            else if [[ "${{ github.event.inputs.action }}" == "destroy" ]];
               cd ${{inputs.terraform-folder}}
               terraform destroy
             else 
