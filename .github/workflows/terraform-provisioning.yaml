@@ -20,13 +20,14 @@ on:
         - destroy
 
 jobs:
-  build:
+  infra-provisioning:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
             repository: brightza008/terraform-ansible
+            token: ${{ secrets.GITHUB_TOKEN }}
             ref: main
             path: terraform/Azure
 
