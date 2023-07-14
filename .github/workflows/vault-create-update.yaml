@@ -44,10 +44,10 @@ jobs:
                 token: ${{ secrets.VAULT_TOKEN }}
                 tlsSkipVerify: true
                 secrets: |
-                    secret/data/test ${{inputs.VAULT_KEY}} | ${{inputs.VAULT_KEY}}
+                    secret/data/test ${{inputs.VAULT_KEY}} | SECRET_ID
 
             - name: reteive the secret from vault
               run : |
-                  echo "${{ steps.get-secrets.outputs.inputs.VAULT_KEY }}"
+                  echo "my user: ${{env.SECRET_ID}}"
 
 
