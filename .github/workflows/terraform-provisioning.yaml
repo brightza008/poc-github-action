@@ -1,0 +1,52 @@
+name: terraform provisioning
+
+on:
+  workflow_dispatch:
+    inputs:
+      terraform-folder:
+        type: choice
+        description: Make a choice
+        required: true
+        options:
+        - blob-storage
+        - learn-terraform-provision-acr
+        - learn-terraform-provision-aks-cluster
+      action:
+        type: choice
+        description: Make a choice
+        default: plan
+        options:
+        - apply
+        - destroy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+            repository: brightza008/terraform-ansible
+            ref: main
+            path: terraform/Azure
+
+      - name: greet
+        run: | 
+
+          echo "boolean is ${{ github.event.inputs.action }}" / ${{ inputs.action }} 
+          echo "choice is ${{ github.event.inputs.terraform-folder }}" / ${{ inputs.terraform-folder }}
+
+      - name: Check approval status
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            if [[ "${{ github.event.inputs.action }}" == "apply" ]]; then
+              cd ${{inputs.terraform-folder}}
+              terraform init
+              terraform apply --auto-approve
+            else if [[ "${{ github.event.inputs.action }}" == "destroy" ]]
+              cd ${{inputs.terraform-folder}}
+              terraform destroy
+            else 
+              terraform plan
+            fi
+          fi
