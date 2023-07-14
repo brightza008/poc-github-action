@@ -39,9 +39,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Check approval status
         run: |
-
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-          ls -R
           cd terraform/Azure/${{inputs.terraform-folder}}
             if [[ "${{ github.event.inputs.action }}" == "apply" ]]; then
                 terraform init
