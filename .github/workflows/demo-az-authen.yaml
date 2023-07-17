@@ -1,4 +1,4 @@
-name: POC_sandbox_authen
+name: demo_az_authen
 on: 
   workflow_dispatch:
   push:
