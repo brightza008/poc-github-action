@@ -13,6 +13,7 @@ on:
 env:
     vault_addr: http://4.194.34.125:8200
     vault_token: ${{secrets.VAULT_TOKEN}}
+    vaultSecretPath: secret/test
 jobs:
     vault-import:
         runs-on: ubuntu-latest
@@ -29,8 +30,15 @@ jobs:
               run: | 
                   export VAULT_ADDR=${vault_addr}
                   export VAULT_TOKEN=${vault_token}
-                  vault kv put secret/test ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
-                  vault kv get secret/test
+
+                  SECRET_PATH=$(vault kv get ${{env.vaultSecretPath}} 2>/dev/null)
+                  if [ -z "${SECRET_PATH}" ];then
+                      echo "Create new path"
+                      vault kv put ${{env.vaultSecretPath}} ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
+                  else
+                      echo "Update existing"
+                      vault kv patch ${{env.vaultSecretPath}} ${{inputs.VAULT_KEY}}=${{inputs.VAULT_SECRET}}
+                  fi
 
     reteive-vault-hashicorp-workflow:
         needs: vault-import
