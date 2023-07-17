@@ -1,0 +1,23 @@
+name: POC_sandbox_authen
+on: 
+  workflow_dispatch:
+  push:
+    branches: [ action-ci ]
+    paths:
+      - .github/workflows/demo-az-authen.yaml
+
+jobs: 
+  login-azure-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Az CLI login'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  
+  login-reuseworkflow:
+    uses: brightza008/poc-github-workflow/.github/workflows/az-authen-cli.yaml@workflow
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      TENANT_ID: ${{ secrets.TENANT_ID }}
