@@ -1,0 +1,23 @@
+name: shared data
+on: 
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo hello > ./world.txt
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: ./world.txt
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+    # - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v2
+      with:
+        name: my-artifact
+    - run: cat world.txt
