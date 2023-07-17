@@ -114,4 +114,4 @@ jobs:
       AKS_NAME: ${{needs.env_workflow.outputs.AKS_NAME}}
       AZURE_STORAGE_ACC_NAME: ${{needs.env_workflow.outputs.BLOB_STORAGE_ACC}}
     secrets: inherit 
-       
+      
