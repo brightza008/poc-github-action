@@ -2,6 +2,10 @@ name: Poc-multiple-env
 
 on:
   workflow_dispatch:
+  push:
+    branches: 
+      - main
+      - action-ci
 
 jobs:
   Build:
@@ -14,7 +18,7 @@ jobs:
     
   DeployDev:
     name: Deploy to Dev 
-    if: github.event_name == 'pull_request'
+    #if: github.event_name == 'pull_request'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
