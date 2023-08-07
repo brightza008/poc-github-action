@@ -1,0 +1,28 @@
+name: POC_package_versioning
+on: 
+    workflow_dispatch:
+    push:
+        branches: [ action-ci ]
+        paths:
+            - .github/workflows/package-versioning.yaml
+
+jobs:
+  package-versioning:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: json property
+        id: json_properties
+        run: |
+          echo "RELEASE_TAG=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
+      - run: |
+          echo "Build tag==> ${{ steps.json_properties.outputs.RELEASE_TAG }}"
+
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            def packageJson = readJSON file: "package.json"
+            def packageVersionInJson = packageJson.version
+            echo "Package Version (package.json): ${packageVersionInJson}"
