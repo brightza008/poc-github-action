@@ -19,6 +19,7 @@ jobs:
         with:
             token: ${{ secrets.PAT }}
             branch: example-patches
+            delete-branch: true
             commit-message: Update report
             committer: GitHub <noreply@github.com>
         
