@@ -13,16 +13,14 @@ jobs:
       - name: Make changes to pull request
         run: date +%s > report.txt
 
-      - name: Create commits
-        run: |
-          git config user.name 'Pongsathorn Upan'
-          git config user.email 'pongsathorn@users.noreply.github.com'
-
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
             token: ${{ secrets.PAT }}
+            branch: example-patches
+            commit-message: Update report
+            committer: GitHub <noreply@github.com>
         
       - name: Check outputs
         if: ${{ steps.cpr.outputs.pull-request-number }}
