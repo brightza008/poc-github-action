@@ -1,0 +1,22 @@
+name: POC_pull-request
+on: 
+    workflow_dispatch:
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+            ref: main
+      - name: Make changes to pull request
+        run: date +%s > report.txt
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
