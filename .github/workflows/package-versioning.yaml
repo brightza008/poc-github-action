@@ -25,19 +25,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install groovy -y
 
-      - run: |
-          echo "today=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
-          env
-          echo " DATE TODAY: ${today}"
-        #   groovy -e """
-        #     def now = new Date();
-        #     def today = now.format("yMMdd", TimeZone.getTimeZone('Asia/Bangkok'))
-        #     println ${today}
-        #   """
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+
 
       - name: Example Dev env.
         run: |
           groovy -e '''
+              println ${{steps.date.outputs.today}}
               def json = new File("package.json").text
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
