@@ -25,7 +25,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install groovy -y
 
-      - name: Read JSON from file and run Groovy script
+      - name: Example Dev env.
         run: |
           groovy -e '''
               def json = new File("package.json").text
@@ -34,14 +34,30 @@ jobs:
               println "${packageVersionInJson}"
               println "Package Version (package.json): ${packageVersionInJson}"
 
-            def versionSplit = packageVersionInJson.split("\\.")
-            int lastDigitVersion = "${versionSplit[versionSplit.size() - 1]}".toInteger()
-            String perfixVersion = "${versionSplit[0]}.${versionSplit[1]}"
-            int nextVersion = lastDigitVersion + 1
-            String newVersion = "${perfixVersion}.${nextVersion}"
-            PackageVersion = "${newVersion}".trim()
+                def versionSplit = packageVersionInJson.split("\\.")
+                int lastDigitVersion = "${versionSplit[versionSplit.size() - 1]}".toInteger()
+                String perfixVersion = "${versionSplit[0]}.${versionSplit[1]}"
+                int nextVersion = lastDigitVersion + 1
+                String newVersion = "${perfixVersion}.${nextVersion}"
+                PackageVersion = "${newVersion}".trim()
 
-            println "Final Version: ${PackageVersion}"
+                println "Final Version: ${PackageVersion}"
+          '''
+
+      - name: Example SIT env.
+        run: |
+          groovy -e '''
+              def json = new File("package.json").text
+              def parsedJson = new groovy.json.JsonSlurper().parseText(json)
+              def packageVersionInJson =  parsedJson.version
+              println "${packageVersionInJson}"
+              println "Package Version (package.json): ${packageVersionInJson}"
+
+                def now = new Date();
+                def today = now.format("yMMdd", TimeZone.getTimeZone('Asia/Bangkok'))
+
+                PackageVersion = "${packageVersionInJson}-${today}-${env.BUILD_NUMBER}".trim()
+                println "Final Version: ${PackageVersion}"
           '''
           
       # - run: |
