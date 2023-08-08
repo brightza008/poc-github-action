@@ -20,10 +20,10 @@ jobs:
       - run: |
           echo "Build tag==> ${{ steps.json_properties.outputs.RELEASE_TAG }}"
 
-      - name: Install Groovy
-        run: |
-          sudo apt-get update
-          sudo apt-get install groovy -y
+      # - name: Install Groovy
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install groovy -y
 
       # - name: Read JSON from file and run Groovy script
       #   run: |
@@ -33,9 +33,11 @@ jobs:
       #     println 'Value from AKS_NAME: ' + parsedJson.AKS_NAME
       #     """
       - run: |
-          def packageJson = readJSON file: "package.json"
-          def packageVersionInJson = packageJson.version
-          echo "Package Version (package.json): ${packageVersionInJson}"
+          groovy -e """
+              def packageJson = readJSON file: "package.json"
+              def packageVersionInJson = packageJson.version
+              echo "Package Version (package.json): ${packageVersionInJson}"
+          """
 
       # - uses: actions/github-script@v6
       #   with:
