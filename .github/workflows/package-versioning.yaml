@@ -35,7 +35,6 @@ jobs:
       - name: Example Dev env.
         run: |
           groovy -e '''
-              println "${{steps.date.outputs.today}}"
               def json = new File("package.json").text
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
@@ -49,24 +48,29 @@ jobs:
                 String newVersion = "${perfixVersion}.${nextVersion}"
                 PackageVersion = "${newVersion}".trim()
 
-                println "Final Version: ${PackageVersion}"
+                println "Final DEV Version: ${PackageVersion}"
+                
+                println "${{steps.date.outputs.today}}"
+                PackageVersion = "${packageVersionInJson}-${today}-${env.BUILD_NUMBER}".trim()
+                println "SIT Version: ${PackageVersion}-${{steps.date.outputs.today}}-${{github.run_number}}"
+                
           '''
 
-      - name: Example SIT env.
-        run: |
-          groovy -e """
-              def json = new File("package.json").text
-              def parsedJson = new groovy.json.JsonSlurper().parseText(json)
-              def packageVersionInJson =  parsedJson.version
-              println "${packageVersionInJson}"
-              println "Package Version \(package.json\): ${packageVersionInJson}"
+    #   - name: Example SIT env.
+    #     run: |
+    #       groovy -e """
+    #           def json = new File("package.json").text
+    #           def parsedJson = new groovy.json.JsonSlurper().parseText(json)
+    #           def packageVersionInJson =  parsedJson.version
+    #           println "${packageVersionInJson}"
+    #           println "Package Version \(package.json\): ${packageVersionInJson}"
 
-                def now = new Date();
-                def today = now.format("yMMdd", TimeZone.getTimeZone('Asia/Bangkok'))
+    #             def now = new Date();
+    #             def today = now.format("yMMdd", TimeZone.getTimeZone('Asia/Bangkok'))
 
-                PackageVersion = "${packageVersionInJson}-${today}-${env.BUILD_NUMBER}".trim()
-                println "Final Version: ${PackageVersion}"
-          """
+    #             PackageVersion = "${packageVersionInJson}-${today}-${env.BUILD_NUMBER}".trim()
+    #             println "Final Version: ${PackageVersion}"
+    #       """
           
 
 
