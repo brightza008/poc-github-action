@@ -19,10 +19,14 @@ jobs:
           echo "RELEASE_TAG=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
       - run: |
           echo "Build tag==> ${{ steps.json_properties.outputs.RELEASE_TAG }}"
+          
+          def packageJson = readJSON file: "package.json"
+          def packageVersionInJson = packageJson.version
+          echo "Package Version (package.json): ${packageVersionInJson}"
 
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            def packageJson = readJSON file: "package.json"
-            def packageVersionInJson = packageJson.version
-            echo "Package Version (package.json): ${packageVersionInJson}"
+      # - uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       def packageJson = readJSON file: "package.json"
+      #       def packageVersionInJson = packageJson.version
+      #       echo "Package Version (package.json): ${packageVersionInJson}"
