@@ -32,19 +32,13 @@ jobs:
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
               println "${packageVersionInJson}"
-              println "Package Version (package.json): " + parsedJson.version
+              println "Package Version (package.json): ${packageVersionInJson}"
           '''
           
-      - run: |
-          groovy -e '''
-            def packageJson = readJSON file: "package.json"
-            def packageVersionInJson = packageJson.version
-            println "Package Version (package.json): ${packageVersionInJson}"
-          '''
+      # - run: |
+      #     groovy -e '''
+      #       def packageJson = readJSON file: "package.json"
+      #       def packageVersionInJson = packageJson.version
+      #       println "Package Version (package.json): ${packageVersionInJson}"
+      #     '''
 
-      # - uses: actions/github-script@v6
-      #   with:
-      #     script: |
-            # def packageJson = readJSON file: "package.json"
-            # def packageVersionInJson = packageJson.version
-            # echo "Package Version (package.json): ${packageVersionInJson}"
