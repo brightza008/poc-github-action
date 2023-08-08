@@ -26,10 +26,10 @@ jobs:
           sudo apt-get install groovy -y
 
       - run: |
-          groovy -e """
+          groovy -e '''
             def now = new Date();
-            def today = now.format('yMMdd', TimeZone.getTimeZone('Asia/Bangkok'))
-          """
+            def today = now.format("yMMdd", TimeZone.getTimeZone('Asia/Bangkok'))
+          '''
 
       - name: Example Dev env.
         run: |
