@@ -41,7 +41,7 @@ jobs:
             String newVersion = "${perfixVersion}.${nextVersion}"
             PackageVersion = "${newVersion}".trim()
 
-            echo "Final Version: ${PackageVersion}"
+            println "Final Version: ${PackageVersion}"
           '''
           
       # - run: |
