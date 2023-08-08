@@ -40,7 +40,7 @@ jobs:
               def packageVersionInJson =  parsedJson.version
               println "Package Version (package.json): ${packageVersionInJson}"
 
-                ## For DEV ENV ##
+                // For DEV ENV //
                 def versionSplit = packageVersionInJson.split("\\.")
                 int lastDigitVersion = "${versionSplit[versionSplit.size() - 1]}".toInteger()
                 String perfixVersion = "${versionSplit[0]}.${versionSplit[1]}"
@@ -50,7 +50,7 @@ jobs:
 
                 println "DEV Version: ${PackageVersion}"
                 
-                ## For SIT ENV ##
+                // For SIT ENV //
                 println "${{steps.date.outputs.today}}"
                 PackageVersion = "${packageVersionInJson}-${{steps.date.outputs.today}}-${{github.run_number}}".trim()
                 println "SIT Version: ${PackageVersion}"
