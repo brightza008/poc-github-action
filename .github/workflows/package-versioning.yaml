@@ -27,11 +27,11 @@ jobs:
 
       - name: Read JSON from file and run Groovy script
         run: |
-          groovy -e """
+          groovy -e '''
           def json = new File("package.json").text
           def parsedJson = new groovy.json.JsonSlurper().parseText(json)
           println 'Package Version (package.json): ' + parsedJson.version
-          """
+          '''
       # - run: |
       #     groovy -e """
       #       def packageJson = readJSON file: "package.json"
