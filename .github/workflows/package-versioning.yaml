@@ -34,9 +34,8 @@ jobs:
 
       - name: Example Dev env.
         run: |
-          echo "today2=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
           groovy -e '''
-              println ${{steps.date.outputs.today2}}
+              println "${{steps.date.outputs.today}}"
               def json = new File("package.json").text
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
