@@ -34,16 +34,15 @@ jobs:
       #     """
       - run: |
           groovy -e """
-              def json = new File('package.json').text
-              def parsedJson = new groovy.json.JsonSlurper().parseText(json)
-              println 'Value from VERSION: ' + parsedJson.version
-              
+            def packageJson = readJSON file: 'package.json'
+            def packageVersionInJson = packageJson.version
+            echo 'Package Version (package.json): ${packageVersionInJson}'
 
           """
 
       # - uses: actions/github-script@v6
       #   with:
       #     script: |
-      #       def packageJson = readJSON file: "package.json"
-      #       def packageVersionInJson = packageJson.version
-      #       echo "Package Version (package.json): ${packageVersionInJson}"
+            # def packageJson = readJSON file: "package.json"
+            # def packageVersionInJson = packageJson.version
+            # echo "Package Version (package.json): ${packageVersionInJson}"
