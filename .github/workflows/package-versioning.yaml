@@ -27,7 +27,7 @@ jobs:
 
       - run: |
           echo "today=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
-          echo " DATE TODAY: ${{env.today}}"
+          echo " DATE TODAY: ${today}"
         #   groovy -e """
         #     def now = new Date();
         #     def today = now.format("yMMdd", TimeZone.getTimeZone('Asia/Bangkok'))
