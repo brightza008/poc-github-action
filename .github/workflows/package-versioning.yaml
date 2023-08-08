@@ -51,8 +51,8 @@ jobs:
                 println "Final DEV Version: ${PackageVersion}"
                 
                 println "${{steps.date.outputs.today}}"
-                PackageVersion = "${packageVersionInJson}-${today}-${env.BUILD_NUMBER}".trim()
-                println "SIT Version: ${PackageVersion}-${{steps.date.outputs.today}}-${{github.run_number}}"
+                PackageVersion = "${packageVersionInJson}-${{steps.date.outputs.today}}-${{github.run_number}}".trim()
+                println "SIT Version: ${PackageVersion}"
                 
           '''
 
