@@ -32,15 +32,15 @@ jobs:
             echo "today=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
 
 
-      - name: Example Dev env.
+      - name: Example Dev/Sit env.
         run: |
           groovy -e '''
               def json = new File("package.json").text
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
-              println "${packageVersionInJson}"
               println "Package Version (package.json): ${packageVersionInJson}"
 
+                ## For DEV ENV ##
                 def versionSplit = packageVersionInJson.split("\\.")
                 int lastDigitVersion = "${versionSplit[versionSplit.size() - 1]}".toInteger()
                 String perfixVersion = "${versionSplit[0]}.${versionSplit[1]}"
@@ -48,8 +48,9 @@ jobs:
                 String newVersion = "${perfixVersion}.${nextVersion}"
                 PackageVersion = "${newVersion}".trim()
 
-                println "Final DEV Version: ${PackageVersion}"
+                println "DEV Version: ${PackageVersion}"
                 
+                ## For SIT ENV ##
                 println "${{steps.date.outputs.today}}"
                 PackageVersion = "${packageVersionInJson}-${{steps.date.outputs.today}}-${{github.run_number}}".trim()
                 println "SIT Version: ${PackageVersion}"
