@@ -58,7 +58,7 @@ jobs:
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
               println "${packageVersionInJson}"
-              println "Package Version (package.json): ${packageVersionInJson}"
+              println "Package Version \(package.json\): ${packageVersionInJson}"
 
                 def now = new Date();
                 def today = now.format("yMMdd", TimeZone.getTimeZone('Asia/Bangkok'))
