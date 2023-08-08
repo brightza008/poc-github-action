@@ -25,12 +25,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install groovy -y
 
-      # - run: |
-      #     groovy -e '''
-      #       def packageJson = readJSON file: "package.json"
-      #       def packageVersionInJson = packageJson.version
-      #       println "Package Version (package.json): ${packageVersionInJson}"
-      #     '''
+      - run: |
+          groovy -e """
+            def now = new Date();
+            def today = now.format('yMMdd', TimeZone.getTimeZone('Asia/Bangkok'))
+          """
 
       - name: Example Dev env.
         run: |
