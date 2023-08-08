@@ -25,6 +25,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install groovy -y
 
+      # - run: |
+      #     groovy -e '''
+      #       def packageJson = readJSON file: "package.json"
+      #       def packageVersionInJson = packageJson.version
+      #       println "Package Version (package.json): ${packageVersionInJson}"
+      #     '''
+
       - name: Example Dev env.
         run: |
           groovy -e '''
@@ -46,7 +53,7 @@ jobs:
 
       - name: Example SIT env.
         run: |
-          groovy -e '''
+          groovy -e """
               def json = new File("package.json").text
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
@@ -58,12 +65,7 @@ jobs:
 
                 PackageVersion = "${packageVersionInJson}-${today}-${env.BUILD_NUMBER}".trim()
                 println "Final Version: ${PackageVersion}"
-          '''
+          """
           
-      # - run: |
-      #     groovy -e '''
-      #       def packageJson = readJSON file: "package.json"
-      #       def packageVersionInJson = packageJson.version
-      #       println "Package Version (package.json): ${packageVersionInJson}"
-      #     '''
+
 
