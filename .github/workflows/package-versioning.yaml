@@ -27,13 +27,16 @@ jobs:
 
       - name: Get current date
         id: date
-        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+        run: |
+            # echo "::set-output name=today::$(date +'%Y-%m-%d')"
+            echo "today=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
 
 
       - name: Example Dev env.
         run: |
+          echo "today2=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
           groovy -e '''
-              println ${{steps.date.outputs.today}}
+              println ${{steps.date.outputs.today2}}
               def json = new File("package.json").text
               def parsedJson = new groovy.json.JsonSlurper().parseText(json)
               def packageVersionInJson =  parsedJson.version
