@@ -33,6 +33,15 @@ jobs:
               def packageVersionInJson =  parsedJson.version
               println "${packageVersionInJson}"
               println "Package Version (package.json): ${packageVersionInJson}"
+
+            def versionSplit = packageVersionInJson.split("\\.")
+            int lastDigitVersion = "${versionSplit[versionSplit.size() - 1]}".toInteger()
+            String perfixVersion = "${versionSplit[0]}.${versionSplit[1]}"
+            int nextVersion = lastDigitVersion + 1
+            String newVersion = "${perfixVersion}.${nextVersion}"
+            PackageVersion = "${newVersion}".trim()
+
+            echo "Final Version: ${PackageVersion}"
           '''
           
       # - run: |
