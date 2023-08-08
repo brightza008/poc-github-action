@@ -30,7 +30,7 @@ jobs:
           groovy -e '''
           def json = new File("package.json").text
           def parsedJson = new groovy.json.JsonSlurper().parseText(json)
-          println 'Package Version (package.json): ' + parsedJson.version
+          println "Package Version (package.json): " + parsedJson.version
           '''
       # - run: |
       #     groovy -e """
