@@ -1,0 +1,17 @@
+name: POC_checkout
+on: 
+  push:
+    branches: 
+      - 'feature/**'
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: |
+          git branch -a
+          ls -R
+

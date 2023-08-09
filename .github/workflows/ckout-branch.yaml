@@ -1,20 +1,20 @@
 name: POC_checkout
 on: 
   push:
-    branches: 
-      - action-ci
-      - 'feature/**'
+    branches: [ action-ci ]
     paths:
       - .github/workflows/ckout-branch.yaml
 
 jobs:
-  checkout:
+  helm-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-
+        with:
+            repository: brightza008/poc-helmchart
+            ref: minikube
       - run: |
-          git branch -a
           ls -R
-
+          echo "Start Helm!!"
+          helm version
