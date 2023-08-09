@@ -1,11 +1,11 @@
-name: POC_checkout
+name: POC_checkout_feature
 on: 
   push:
     branches: 
       - 'feature/**'
 
 jobs:
-  checkout:
+  checkout_feature:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
