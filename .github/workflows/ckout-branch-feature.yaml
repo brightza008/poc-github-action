@@ -15,4 +15,7 @@ jobs:
           git branch -a
           ls -R
           echo "Branch Name: ${GITHUB_REF}"
-
+          echo "Branch Name: ${{github.ref_name}}"
+          ## reformat feature branch ##
+          reformat=$(echo ${{github.ref_name}} | sed "s|/|-|g")
+          echo "Namespace: ${reformat}"
