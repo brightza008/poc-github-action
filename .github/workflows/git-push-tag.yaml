@@ -1,0 +1,20 @@
+name: POC_push-git-tag
+on: 
+  push:
+    branches: [ action-ci ]
+    paths:
+      - .github/workflows/git-push-tag.yaml
+
+env:
+  PackageVersion: 1.0.0.0
+jobs:
+  push-git-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git tag -a ${{env.PackageVersion}} -m 'my version' -f
+          git push --tag -f
