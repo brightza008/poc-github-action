@@ -1,0 +1,23 @@
+name: Authen wtih managed identity
+on: 
+  workflow_dispatch:
+
+jobs:
+  login:
+    runs-on: self-hosted
+    steps:
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          auth-type: IDENTITY
+          client-id: "73b06f9f-a9c0-4458-90bf-f128b18f6149" ##${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: "0a878ee1-73e4-4e9c-8bf9-930c17df1fd2" ##${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: "756952db-9653-4f48-bed7-49ea8d2a8ada" ##${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+  azurecli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: az cli
+        run: |
+          az resource list
