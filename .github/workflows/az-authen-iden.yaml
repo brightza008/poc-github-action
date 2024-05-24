@@ -1,6 +1,8 @@
 name: Authen wtih managed identity
 on: 
   workflow_dispatch:
+  push:
+    branches: [ action-ci ]
 
 jobs:
   login:
@@ -10,9 +12,9 @@ jobs:
         uses: azure/login@v2
         with:
           auth-type: IDENTITY
-          client-id: ##${{ secrets.AZURE_CLIENT_ID }}##
-          tenant-id:  ##${{ secrets.AZURE_TENANT_ID }}##
-          subscription-id: ##${{ secrets.AZURE_SUBSCRIPTION_ID }}##
+          client-id: "5d25dd9f-4319-4313-87b1-e4041d325e30" ##${{ secrets.AZURE_CLIENT_ID }}##
+          tenant-id: "8b41a058-9ec4-4f21-8450-44bf843a0b44" ##${{ secrets.AZURE_TENANT_ID }}##
+          subscription-id: "6722572a-c1d9-47d5-a6cf-765f7ad9c6d2" ##${{ secrets.AZURE_SUBSCRIPTION_ID }}##
           enable-AzPSSession: true
 
       - name: az cli
