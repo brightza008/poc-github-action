@@ -70,7 +70,7 @@ jobs:
 
   az_login_managed_iden: 
     if: contains(github.event.commits[0].message, 'login_iden')
-    name: "Calling workflow Azure login"
+    name: "Calling workflow Azure login with managed identity"
     uses: brightza008/poc-github-workflow/.github/workflows/az-authen-iden-selfhosted.yaml@workflow
 
   Build_Docker_ACR:
