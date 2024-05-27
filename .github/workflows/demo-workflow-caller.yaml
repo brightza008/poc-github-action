@@ -67,11 +67,12 @@ jobs:
     uses: brightza008/poc-github-workflow/.github/workflows/az-authen.yaml@workflow
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      
   az_login_managed_iden: 
     if: contains(github.event.commits[0].message, 'login_iden')
     name: "Calling workflow Azure login"
     uses: brightza008/poc-github-workflow/.github/workflows/az-authen-iden-selfhosted.yaml@workflow
-    
+
   Build_Docker_ACR:
     needs: env_workflow
     if: contains(github.event.commits[0].message, 'bbb')
