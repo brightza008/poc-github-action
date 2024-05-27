@@ -67,7 +67,7 @@ jobs:
     uses: brightza008/poc-github-workflow/.github/workflows/az-authen.yaml@workflow
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-      
+
   az_login_managed_iden: 
     if: contains(github.event.commits[0].message, 'login_iden')
     name: "Calling workflow Azure login"
@@ -105,18 +105,18 @@ jobs:
       APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }} # use the output (app version) from docker-build-acr.yaml
     secrets: inherit # pass all secrets into reuse-workflow
  
-  Deploy_helm:  ## now use Helm values form https://github.com/brightza008/poc-helmchart.git
-    needs: [env_workflow,Helm_Build_Chart] 
-    if: contains(github.event.commits[0].message, 'bbb')
-    name: "Helm deploy to AKS"
-    uses: brightza008/poc-github-workflow/.github/workflows/helm-aks.yaml@workflow
-    with:
-      APP_NAME: ${{github.event.repository.name}}
-      APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }}
-      HELM_VALUES_REPO: ${{needs.env_workflow.outputs.HELM_VALUES_REPO}}
-      HELM_VALUES_BRANCH: ${{needs.env_workflow.outputs.HELM_VALUES_BRANCH}}
-      AKS_RESOURCE_GROUP: ${{needs.env_workflow.outputs.AKS_RESOURCE_GROUP}}
-      AKS_NAME: ${{needs.env_workflow.outputs.AKS_NAME}}
-      AZURE_STORAGE_ACC_NAME: ${{needs.env_workflow.outputs.BLOB_STORAGE_ACC}}
-    secrets: inherit 
+  # Deploy_helm:  ## now use Helm values form https://github.com/brightza008/poc-helmchart.git
+  #   needs: [env_workflow,Helm_Build_Chart] 
+  #   if: contains(github.event.commits[0].message, 'bbb')
+  #   name: "Helm deploy to AKS"
+  #   uses: brightza008/poc-github-workflow/.github/workflows/helm-aks.yaml@workflow
+  #   with:
+  #     APP_NAME: ${{github.event.repository.name}}
+  #     APP_VERSION: ${{ needs.Build_Docker_ACR.outputs.PACKAGE_VERSION }}
+  #     HELM_VALUES_REPO: ${{needs.env_workflow.outputs.HELM_VALUES_REPO}}
+  #     HELM_VALUES_BRANCH: ${{needs.env_workflow.outputs.HELM_VALUES_BRANCH}}
+  #     AKS_RESOURCE_GROUP: ${{needs.env_workflow.outputs.AKS_RESOURCE_GROUP}}
+  #     AKS_NAME: ${{needs.env_workflow.outputs.AKS_NAME}}
+  #     AZURE_STORAGE_ACC_NAME: ${{needs.env_workflow.outputs.BLOB_STORAGE_ACC}}
+  #   secrets: inherit 
        
