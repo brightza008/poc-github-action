@@ -1,5 +1,4 @@
-name: Example Workflow
-
+name: groovy-output
 on:
   workflow_dispatch:
     inputs:
@@ -28,7 +27,7 @@ jobs:
       - name: Execute Groovy script
         id: set-package-version
         run: |
-          newVersion = "1.0.0"  // Define newVersion here or use input
+          def newVersion = "1.0.0"  // Define newVersion here or use input
           groovy -e '''
             // Log environment variables
             println "JOB_ENVIRONMENT: ${System.getenv("JOB_ENVIRONMENT")}"
