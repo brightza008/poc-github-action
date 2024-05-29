@@ -1,0 +1,68 @@
+name: Example Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      JobEnvironment:
+        description: 'Job environment'
+        required: true
+        default: 'feature-branch'
+        type: string
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    outputs:
+      PACKAGE_VERSION: ${{ steps.set-package-version.outputs.PACKAGE_VERSION }}
+      PackageVersion: ${{ steps.set-package-version.outputs.PackageVersion }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set environment variables
+        run: |
+          echo "JOB_ENVIRONMENT=${{ github.event.inputs.JobEnvironment }}" >> $GITHUB_ENV
+          echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Execute Groovy script
+        id: set-package-version
+        run: |
+          newVersion = "1.0.0"  // Define newVersion here or use input
+          groovy -e '''
+            // Log environment variables
+            println "JOB_ENVIRONMENT: ${System.getenv("JOB_ENVIRONMENT")}"
+            println "TODAY: ${System.getenv("TODAY")}"
+            println "RUN_NUMBER: ${System.getenv("RUN_NUMBER")}"
+
+            // Assign input to a variable
+            def jobEnvironment = System.getenv("JOB_ENVIRONMENT")
+            println "Job Environment: ${jobEnvironment}"
+
+            // Define PackageVersion variable
+            def PackageVersion = ""
+
+            // Conditional logic based on input
+            if (jobEnvironment == "feature-branch") {
+                println("Running for feature-branch environment")
+                PackageVersion = "${newVersion}".trim()
+            } else {
+                println("Running for other environment")
+                // For SIT ENV //
+                PackageVersion = "${newVersion}-${System.getenv("TODAY")}-${System.getenv("RUN_NUMBER")}".trim()
+            }
+
+            // Set PACKAGE_VERSION output
+            println "PACKAGE_VERSION=${PackageVersion}"
+
+            // Output the PackageVersion value
+            println "PackageVersion=${PackageVersion}"
+          '''
+        
+      - name: Use PACKAGE_VERSION output
+        run: |
+            echo "Package Version: ${{ steps.set-package-version.outputs.PACKAGE_VERSION }}"
+
+      - name: Print PackageVersion
+        run: |
+            echo "Package Version: ${{ steps.set-package-version.outputs.PackageVersion }}"
