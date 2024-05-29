@@ -3,7 +3,7 @@ on:
   push:
     branches: [ action-ci ]
     paths:
-      - .github/workflows/git-push-tag.yaml
+      - .github/workflows/groovy-output.yaml
   workflow_dispatch:
     inputs:
       JobEnvironment:
@@ -70,8 +70,8 @@ jobs:
         
       - name: Use PACKAGE_VERSION output
         run: |
-            echo "Package Version: ${{ steps.set-package-version.outputs.PACKAGE_VERSION }}"
+            echo "Package Version: ${{ needs.set-package-version.outputs.PACKAGE_VERSION }}"
 
       - name: Print PackageVersion
         run: |
-            echo "Package Version: ${{ steps.set-package-version.outputs.PackageVersion }}"
+            echo "Package Version: ${{ needs.set-package-version.outputs.PackageVersion }}"
