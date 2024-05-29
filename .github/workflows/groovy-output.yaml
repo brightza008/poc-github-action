@@ -66,7 +66,9 @@ jobs:
 
             // Output the PackageVersion value
             println "PackageVersion=${PackageVersion}"
+            output = PackageVersion
           '''
+          echo "::set-output name=PACKAGE_VERSION::${output}"
         
       - name: Use PACKAGE_VERSION output
         run: |
