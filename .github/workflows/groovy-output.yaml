@@ -68,7 +68,7 @@ jobs:
             println "PackageVersion=${PackageVersion}"
             output = PackageVersion
           '''
-          echo "::set-output name=PACKAGE_VERSION::${output}"
+          echo "PACKAGE_VERSION=${output}" >> $GITHUB_ENV
         
       - name: Use PACKAGE_VERSION output
         run: |
