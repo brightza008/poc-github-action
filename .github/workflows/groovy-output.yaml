@@ -69,6 +69,7 @@ jobs:
             output = PackageVersion
           '''
           echo "$output" > package_version.txt  # Write PackageVersion to a temporary file
+          cat package_version.txt
 
       - name: Read PACKAGE_VERSION from file
         id: read-package-version
@@ -78,8 +79,9 @@ jobs:
         
       - name: Use PACKAGE_VERSION output
         run: |
-            echo "Package Version: ${{ steps.set-package-version.outputs.PACKAGE_VERSION }}"
+            echo "Package Version: ${{ steps.read-package-version.outputs.PACKAGE_VERSION }}"
 
       - name: Print PackageVersion
         run: |
-            echo "Package Version: ${{ steps.set-package-version.outputs.PackageVersion }}"
+            echo "Package Version: ${{ steps.read-package-version.outputs.PackageVersion }}"
+
