@@ -61,15 +61,12 @@ jobs:
                 PackageVersion = "${newVersion}-${System.getenv("TODAY")}-${System.getenv("RUN_NUMBER")}".trim()
             }
 
-            // Set PACKAGE_VERSION output
-            println "PACKAGE_VERSION=${PackageVersion}"
-
-            // Output the PackageVersion value
-            println "PackageVersion=${PackageVersion}"
+            // Write PackageVersion value to a temporary file
+            new File("package_version.txt").write(PackageVersion)
+            
             output = PackageVersion
           '''
-          // Write PackageVersion value to a temporary file
-            new File("package_version.txt").write(PackageVersion)
+
           cat package_version.txt
 
       - name: Read PACKAGE_VERSION from file
