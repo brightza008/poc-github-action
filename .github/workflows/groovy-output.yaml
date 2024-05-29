@@ -1,5 +1,9 @@
 name: groovy-output
 on:
+  push:
+    branches: [ action-ci ]
+    paths:
+      - .github/workflows/git-push-tag.yaml
   workflow_dispatch:
     inputs:
       JobEnvironment:
@@ -17,6 +21,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Install Groovy
+        run: |
+          sudo apt-get update
+          sudo apt-get install groovy -y
 
       - name: Set environment variables
         run: |
