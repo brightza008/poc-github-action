@@ -15,9 +15,8 @@ on:
 jobs:
   example-job:
     runs-on: ubuntu-latest
-    outputs:
-      PACKAGE_VERSION: ${{ steps.set-package-version.outputs.PACKAGE_VERSION }}
-      PackageVersion: ${{ steps.set-package-version.outputs.PackageVersion }}
+    # outputs:
+    #   PACKAGE_VERSION: ${{ steps.set-package-version.outputs.PACKAGE_VERSION }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -77,8 +76,4 @@ jobs:
       - name: Use PACKAGE_VERSION output
         run: |
             echo "Package Version: ${{ steps.read-package-version.outputs.PACKAGE_VERSION }}"
-
-      - name: Print PackageVersion
-        run: |
-            echo "Package Version: ${{ steps.read-package-version.outputs.PackageVersion }}"
 
