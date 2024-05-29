@@ -70,8 +70,8 @@ jobs:
         
       - name: Use PACKAGE_VERSION output
         run: |
-            echo "Package Version: ${{ needs.set-package-version.outputs.PACKAGE_VERSION }}"
+            echo "Package Version: ${{ steps.set-package-version.outputs.PACKAGE_VERSION }}"
 
       - name: Print PackageVersion
         run: |
-            echo "Package Version: ${{ needs.set-package-version.outputs.PackageVersion }}"
+            echo "Package Version: ${{ steps.set-package-version.outputs.PackageVersion }}"
