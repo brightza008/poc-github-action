@@ -27,8 +27,9 @@ jobs:
       - name: Execute Groovy script
         id: set-package-version
         run: |
-          def newVersion = "1.0.0"  // Define newVersion here or use input
+         
           groovy -e '''
+            def newVersion = "1.0.0"  // Define newVersion here or use input
             // Log environment variables
             println "JOB_ENVIRONMENT: ${System.getenv("JOB_ENVIRONMENT")}"
             println "TODAY: ${System.getenv("TODAY")}"
