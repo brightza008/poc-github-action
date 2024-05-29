@@ -63,8 +63,7 @@ jobs:
 
             // Write PackageVersion value to a temporary file
             new File("package_version.txt").write(PackageVersion)
-            
-            output = PackageVersion
+
           '''
 
           cat package_version.txt
