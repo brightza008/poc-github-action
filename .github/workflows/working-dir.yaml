@@ -34,6 +34,5 @@ jobs:
 
     - run: |
         ls -R
-        echo "Start Helm!!"
-        helm version
+        ls -lrt
 
