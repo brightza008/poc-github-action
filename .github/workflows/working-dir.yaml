@@ -1,0 +1,39 @@
+
+name: POC_working_dir
+on: 
+    push:
+        branches: [ action-ci ]
+        paths:
+        - .github/workflows/working-dir.yaml
+    
+defaults:
+ run:
+  working-directory: ./app
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v3
+      with:
+        path: source_code
+
+    - name: Check out helmchart
+      uses: actions/checkout@v3
+      with:
+        repository: brightza008/poc-helmchart
+        ref: minikube
+        path: helmchart
+
+    - name: Check out helmvalue
+      uses: actions/checkout@v3
+      with:
+        repository: MuZikZz-Org/Helm-Vaules
+        ref: main
+        path: helmvalue
+
+    - run: |
+        ls -R
+        echo "Start Helm!!"
+        helm version
+
