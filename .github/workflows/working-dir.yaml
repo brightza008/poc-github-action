@@ -6,9 +6,9 @@ on:
         paths:
         - .github/workflows/working-dir.yaml
     
-defaults:
- run:
-  working-directory: ./app
+# defaults:
+#  run:
+#   working-directory: ./app
 jobs:
   checkout:
     runs-on: ubuntu-latest
