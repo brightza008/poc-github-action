@@ -5,12 +5,8 @@ on:
         branches: [ action-ci ]
         paths:
         - .github/workflows/working-dir.yaml
-    
-# defaults:
-#  run:
-#   working-directory: ./app
 jobs:
-  checkout:
+  Checkout:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Source
@@ -36,3 +32,21 @@ jobs:
         ls -R
         ls -lrt
 
+    - name: Save workspace
+      run: |
+        touch workspace.tar.gz
+        tar --exclude=workspace.tar.gz -czf workspace.tar.gz .
+      continue-on-error: true
+
+    - name: Upload workspace artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: workspace
+        path: workspace.tar.gz
+
+  Call_reused_working_dir: 
+    needs: [Checkout]
+    name: "Compress file(zip,tar) and Upload to StorageAccount"
+    uses: brightza008/poc-github-workflow/.github/workflows/reused-working-dir.yaml@workflow
+    with:
+      workspace: "shared_working_dir"
