@@ -1,6 +1,7 @@
 
 name: POC_working_dir
 on: 
+    workflow_dispatch:
     push:
         branches: [ action-ci ]
         paths:
