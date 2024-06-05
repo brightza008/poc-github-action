@@ -7,18 +7,10 @@ on:
       - .github/workflows/read-var-file.yaml
   
 jobs:
-  env_workflow:
-    runs-on: ubuntu-latest
-    name: Preparation Environment
-    outputs: 
-      AZ_CONTAINER_REGISTRY: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}
-    steps:
-      - run: |
-          echo "preparing output env"
-
   set-env-fromJson:
     runs-on: ubuntu-latest
-    needs: env_workflow
+    outputs: 
+      AZ_CONTAINER_REGISTRY: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -29,7 +21,16 @@ jobs:
       #       env
       #       echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
       #       echo "env: ${{env.CONFIG_JSON}}"
- 
+
+  # env_workflow:
+  #   runs-on: ubuntu-latest
+  #   name: Preparation Environment
+  #   outputs: 
+  #     AZ_CONTAINER_REGISTRY: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}
+  #   steps:
+  #     - run: |
+  #         echo "preparing output env"
+
   json-from-vars:
     runs-on: ubuntu-latest
     needs: set-env-fromJson
