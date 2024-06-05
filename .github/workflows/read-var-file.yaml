@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Preparation Environment
     outputs: 
-      AZ_CONTAINER_REGISTRY: ${{env.AZ_CONTAINER_REGISTRY}}
+      AZ_CONTAINER_REGISTRY: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}
+    steps:
+      - run: |
+          echo "preparing output env"
 
   set-env-fromJson:
     runs-on: ubuntu-latest
@@ -22,10 +25,10 @@ jobs:
 
       - run: |
             echo "CONFIG_JSON=$(jq -c . < config-var.json)" >> $GITHUB_ENV
-      - run: |
-            env
-            echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
-            echo "env: ${{env.CONFIG_JSON}}"
+      # - run: |
+      #       env
+      #       echo "fromJson: ${{ fromJson(env.CONFIG_JSON).AZ_CONTAINER_REGISTRY }}"
+      #       echo "env: ${{env.CONFIG_JSON}}"
  
   json-from-vars:
     runs-on: ubuntu-latest
