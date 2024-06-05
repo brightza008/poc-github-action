@@ -41,7 +41,7 @@ jobs:
 
   json-from-env-output:
     runs-on: ubuntu-latest
-    needs: [set-env-fromJson,env_workflow]
+    needs: [set-env-fromJson]
     steps:
       - name: check variable from setting
         run : |
