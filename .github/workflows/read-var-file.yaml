@@ -45,4 +45,4 @@ jobs:
     steps:
       - name: check variable from setting
         run : |
-            echo "env output : ${{needs.env_workflow.outputs.AZ_CONTAINER_REGISTRY}}
+            echo "env output : ${{needs.set-env-fromJson.outputs.AZ_CONTAINER_REGISTRY}}
