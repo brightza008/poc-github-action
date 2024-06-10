@@ -1,24 +1,47 @@
-name: example-workflow
+name: env_with_condition
 on:
   workflow_dispatch:
   push:
     branches:
-      - 'action-ci'
+      - 'feature/**'
       - 'rc/**'
     paths:
       - .github/workflows/env-with-condition.yaml
 
-env:
+env: 
   Project: "mpay-modernization"
-  JobEnvironment: ${{ github.event_name == 'workflow_dispatch' || github.event.ref_type == 'branch' && startsWith(github.event.ref, 'action-ci') && 'feature-branch' || github.event.ref_type == 'branch' && startsWith(github.event.ref, 'rc/') && 'dev-branch' }}
-
 jobs:
-  your-job-name:
+  env_workflow:
     runs-on: ubuntu-latest
-
+    name: Preparation Environment
+    outputs: 
+      Project: ${{env.Project}}
+      JobEnvironment: ${{env.JobEnvironment}}
     steps:
-      - name: Set up environment variables
+      - name: Set JobEnvironment based on branch
         run: |
-          echo "Project: $Project, JobEnvironment: $JobEnvironment"
-
-    
+          if [[ "${{github.ref}}" == 'refs/heads/feature/'* ]]; then
+            echo "Match feature/* !!"
+            echo "JobEnvironment=feature-branch" >> $GITHUB_ENV
+            
+          elif [[ "${{github.ref}}" == 'refs/heads/rc/'* ]]; then
+            echo "Match rc/* !!"
+            echo "JobEnvironment=dev-branch" >> $GITHUB_ENV
+          else
+            echo "No match"
+          fi
+          
+      - name: ECHO
+        run: |
+          echo "env=${{ env.JobEnvironment }}"
+          echo "Project: ${{env.Project}}, JobEnvironment: ${{env.JobEnvironment}}"
+          printenv
+      
+  your-job-name:
+    needs: [env_workflow]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up environment variables from output
+        run: |
+          echo "Project: ${{needs.env_workflow.outputs.Project}}, JobEnvironment: ${{needs.env_workflow.outputs.JobEnvironment}}"
+          printenv
