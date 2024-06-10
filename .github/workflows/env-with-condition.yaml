@@ -18,6 +18,7 @@ jobs:
 
     steps:
       - name: Set up environment variables
-        run: echo "Project: $Project, JobEnvironment: $JobEnvironment"
+        run: |
+          echo "Project: $Project, JobEnvironment: $JobEnvironment"
 
     
