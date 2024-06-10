@@ -10,7 +10,7 @@ on:
 
 env:
   Project: "mpay-modernization"
-  JobEnvironment: ${{ github.event_name == 'workflow_dispatch' || github.event.ref_type == 'branch' && startsWith(github.event.ref, 'feature/') && 'feature-branch' || github.event.ref_type == 'branch' && startsWith(github.event.ref, 'rc/') && 'dev-branch' }}
+  JobEnvironment: ${{ github.event_name == 'workflow_dispatch' || github.event.ref_type == 'branch' && startsWith(github.event.ref, 'action-ci/') && 'feature-branch' || github.event.ref_type == 'branch' && startsWith(github.event.ref, 'rc/') && 'dev-branch' }}
 
 jobs:
   your-job-name:
