@@ -1,0 +1,25 @@
+name: Example Workflow with Escaped $
+
+on:
+  push:
+    branches: [ action-ci ]
+    paths:
+      - .github/workflows/Escaped_char.yaml
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set environment variable with escaped dollar sign
+        run: |
+          # Example of setting an environment variable with $web
+          echo "MY_VAR=example$$web" >> $GITHUB_ENV
+
+      - name: Use the environment variable
+        run: |
+          # Print the environment variable to demonstrate it was set correctly
+          echo "The value of MY_VAR is: $MY_VAR"
