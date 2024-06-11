@@ -17,7 +17,7 @@ jobs:
       - name: Set environment variable with escaped dollar sign
         run: |
           # Example of setting an environment variable with $web
-          echo "MY_VAR=example$$web" >> $GITHUB_ENV
+          echo "MY_VAR=example\$web" >> $GITHUB_ENV
 
       - name: Use the environment variable
         run: |
