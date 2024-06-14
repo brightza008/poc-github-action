@@ -18,7 +18,7 @@ on:
           - 'Release'
           - 'Snapshot'
   push:
-run-name: ${{ github.workflow }} - ${{ format('{0} On Branch {1}', tojson(inputs), github.ref_name) || '' }}
+run-name: ${{ github.workflow }} - ${{ format('{0} Branch={1}', tojson(inputs), github.ref_name) || '' }}
 # run-name: ${{ github.event_name == 'workflow_dispatch' && format('Build Maven Libs with {0} On Branch {1}', toJson(inputs), github.ref_name) || '' }}
 
 jobs:
