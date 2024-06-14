@@ -17,7 +17,7 @@ on:
         options:
           - 'Release'
           - 'Snapshot'
-run-name: ${{ github.event_name == 'workflow_dispatch' && format('Build Maven Libs with {0} // On Branch: {1}', tojson(inputs), github.ref_name) || '' }}
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('Build Maven Libs with {0} On Branch: {1}', tojson(inputs), github.ref_name) || '' }}
 jobs:
   run:
     runs-on: ubuntu-latest
