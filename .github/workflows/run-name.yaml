@@ -1,0 +1,27 @@
+name: POC_run-name
+on: 
+  workflow_dispatch:
+    inputs:
+      Version:
+        required: true
+        type: string
+        description: "Version x.x.x" 
+      SourceCodeBranch:
+        required: true
+        default: main
+        type: string
+      choice:
+        type: choice
+        description: 'VersioningType'
+        default: 'Release'
+        options:
+          - 'Release'
+          - 'Snapshot'
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('Build Maven Libs with {0} // On Branch: {1}', tojson(inputs), github.ref_name) || '' }}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        run: |
+          echo "hi !!"
