@@ -12,16 +12,18 @@ jobs:
       - name: Get current date
         id: date
         run: |
-            echo "today=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+            echo "today=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
 
       - name: create new file
         run: |
-            echo "today=$(date +'%Y%m%d')" >> $GITHUB_ENV
+            touch build_info.txt
 
-            echo "Repo Name: ${{ github.repository.name }}"
-            echo "Version: 0.0.1"
-            echo "Pipeline Count Number: ${{ github.run_number }}"
-            echo "Build Date Time: ${{steps.date.outputs.today}}"
-            echo "Git Commit Hash: ${{ github.sha }}"
+            echo "Repo Name: ${{ github.repository.name }}
+            Version: 0.0.1
+            Pipeline Count Number: ${{ github.run_number }}
+            Build Date Time: ${{steps.date.outputs.today}}
+            Git Commit Hash: ${{ github.sha }}" >> build_info.txt
+
+            cat build_info.txt
             
 
