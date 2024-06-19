@@ -12,13 +12,13 @@ jobs:
       - name: Get current date
         id: date
         run: |
-            echo "today=$(TZ='Asia/Bangkok' date +'%Y%m%d-%H:%M:%S')" >> $GITHUB_OUTPUT
+            echo "today=$(TZ='Asia/Bangkok' date +'%Y%m%d-%H:%M')" >> $GITHUB_OUTPUT
 
       - name: create new file
         run: |
             touch build_info.txt
 
-            echo "Repo Name: ${{ github.repository.name }}
+            echo "Repo Name: ${{github.event.repository.name}}
             Version: 0.0.1
             Pipeline Count Number: ${{ github.run_number }}
             Build Date Time: ${{steps.date.outputs.today}}
