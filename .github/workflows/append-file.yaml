@@ -9,14 +9,19 @@ jobs:
   append-file:
     runs-on: ubuntu-latest
     steps:
+      - name: Get current date
+        id: date
+        run: |
+            echo "today=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+
       - name: create new file
         run: |
             echo "today=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
-            echo "Git Commit Hash: ${{ github.repository }}"
+            echo "Repo Name: ${{ github.repository.name }}"
             echo "Version: 0.0.1"
             echo "Pipeline Count Number: ${{ github.run_number }}"
-            echo "Build datetime: ${{ env.today }}"
+            echo "Build Date Time: ${{steps.date.outputs.today}}"
             echo "Git Commit Hash: ${{ github.sha }}"
             
 
