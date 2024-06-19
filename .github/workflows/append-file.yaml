@@ -12,7 +12,7 @@ jobs:
       - name: Get current date
         id: date
         run: |
-            echo "today=$(TZ='Asia/Bangkok' date +'%Y%m%d-%H:%M')" >> $GITHUB_OUTPUT
+            echo "today=$(TZ='Asia/Bangkok' date +'%Y/%m/%d %H:%M')" >> $GITHUB_OUTPUT
 
       - name: create new file
         run: |
