@@ -1,17 +1,22 @@
 name: POC_append_file
 on: 
+  workflow_dispatch:
   push:
     branches: [ action-ci ]
     paths:
       - .github/workflows/append-file.yaml
-
 jobs:
   append-file:
     runs-on: ubuntu-latest
     steps:
       - name: create new file
         run: |
-            echo "Run ID: ${{ github.run_id }}"
-            echo "Run ID Num: ${{ github.run_number }}"
-            echo "Run ID Attempt: ${{ github.run_attempt }}"
+            echo "today=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+
+            echo "Git Commit Hash: ${{ github.repository }}"
+            echo "Version: 0.0.1"
+            echo "Pipeline Count Number: ${{ github.run_number }}"
+            echo "Build datetime: ${{ env.today }}"
+            echo "Git Commit Hash: ${{ github.sha }}"
+            
 
