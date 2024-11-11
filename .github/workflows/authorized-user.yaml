@@ -2,18 +2,28 @@ name: Auth User
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   workflow_dispatch:
-    inputs:
-        environment:
-          description: 'Environment to deploy'
-          required: true
   push:
     branches: [ action-ci ]
     paths:
       - .github/workflows/authorized-user.yaml
 jobs:
-  deploy:
+  auth_by_username:
     if: github.actor == 'authorized_user' 
     runs-on: ubuntu-latest
     steps:
+      - name: Deploy to production
+        run: echo "Deploying to production"
+  auth_by_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get GitHub User Email
+        id: get_email
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          email=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            https://api.github.com/users/${{ github.actor }} | jq -r '.email')
+          echo "User email is: $email"
+          
       - name: Deploy to production
         run: echo "Deploying to production"
