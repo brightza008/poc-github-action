@@ -1,0 +1,14 @@
+name: Auth User
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: 
+  push:
+    branches: [ action-ci ]
+    paths:
+      - .github/workflows/authorized-user.yaml
+jobs:
+  deploy:
+    if: github.actor == 'authorized_user' 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        run: echo "Deploying to production"
