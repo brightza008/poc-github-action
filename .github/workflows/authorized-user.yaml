@@ -22,8 +22,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           email=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            https://api.github.com/users/${{ github.actor }} | jq -r '.email')
+            https://api.github.com/users/${{ github.actor }}) # | jq -r '.email')
           echo "User email is: $email"
-          
+
       - name: Deploy to production
         run: echo "Deploying to production"
