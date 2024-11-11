@@ -2,6 +2,10 @@ name: Auth User
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   workflow_dispatch:
+    inputs:
+        environment:
+          description: 'Environment to deploy'
+          required: true
   push:
     branches: [ action-ci ]
     paths:
