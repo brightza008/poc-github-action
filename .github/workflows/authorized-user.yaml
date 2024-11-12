@@ -8,22 +8,21 @@ on:
       - .github/workflows/authorized-user.yaml
 jobs:
   auth_by_username:
-    if: github.actor == 'authorized_user' 
+    if: github.actor == 'pongsathorn-92432' 
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to production
         run: echo "Deploying to production"
-  auth_by_email:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get GitHub User Email
-        id: get_email
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Create/Update environment
         run: |
-          email=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            https://api.github.com/users/${{ github.actor }}) # | jq -r '.email')
-          echo "User email is: $email"
+            gh api \
+            --method PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/ais-pci-spdg/mpay-modernization-devops/environments/uat \
+            -F "wait_timer=30" -F "prevent_self_review=false" -f "reviewers[][type]=User" \
+            -F "reviewers[][id]=1" -f "reviewers[][type]=Team" -F "reviewers[][id]=1" \
+            -F "deployment_branch_policy[protected_branches]=false" -F "deployment_branch_policy[custom_branch_policies]=true"
 
-      - name: Deploy to production
-        run: echo "Deploying to production"
+
