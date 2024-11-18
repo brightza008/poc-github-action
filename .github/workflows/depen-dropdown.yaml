@@ -32,7 +32,7 @@ jobs:
         if: ${{ inputs.webtarget != 'none' || startsWith(inputs.runtime, 'webhosting') }}
         run: |
           echo "Runtime: ${{ github.event.inputs.runtime }}"
-          echo "Web Target: ${{ github.event.inputs.webtarget }}"
+          echo "WebTarget: ${{ github.event.inputs.webtarget }}"
           case ${{ github.event.inputs.runtime }} in
             "WebhostingBuildAndZip")
               case ${{ github.event.inputs.webtarget }} in
@@ -57,9 +57,9 @@ jobs:
               esac
               ;;
             *)
-            #   echo "Invalid webtarget option!" >&2
-            #   exit 1
-            #   ;;
+              echo "webtarget cannot be 'none'" >&2
+              exit 1
+              ;;
           esac
 
       - name: skipped validate
