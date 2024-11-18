@@ -8,8 +8,8 @@ on:
         required: true
         type: choice
         options:
-          - Option A
-          - Option B
+          - OptionA
+          - OptionB
       secondary_option:
         description: "Choose the secondary option (related to primary)"
         required: true
@@ -31,7 +31,7 @@ jobs:
           echo "Primary: ${{ github.event.inputs.primary_option }}"
           echo "Secondary: ${{ github.event.inputs.secondary_option }}"
           case ${{ github.event.inputs.primary_option }} in
-            "Option A")
+            "OptionA")
               case ${{ github.event.inputs.secondary_option }} in
                 "A1"|"A2")
                   echo "Valid combination: Option A -> ${{ github.event.inputs.secondary_option }}"
@@ -42,7 +42,7 @@ jobs:
                   ;;
               esac
               ;;
-            "Option B")
+            "OptionB")
               case ${{ github.event.inputs.secondary_option }} in
                 "B1"|"B2")
                   echo "Valid combination: Option B -> ${{ github.event.inputs.secondary_option }}"
