@@ -1,4 +1,6 @@
-name: Related Dropdowns Example
+name: POC Related Dropdowns
+run-name: ${{ github.workflow }} - ${{ format('{0}', tojson(inputs)) || '' }}
+
 
 on:
   workflow_dispatch:
