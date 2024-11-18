@@ -3,24 +3,23 @@ name: Related Dropdowns Example
 on:
   workflow_dispatch:
     inputs:
-      primary_option:
-        description: "Choose the primary option"
+      runtime:
+        description: "Service Type"
         required: true
         type: choice
         options:
-          - OptionA
-          - OptionB
-      secondary_option:
-        description: "Choose the secondary option (related to primary)"
+          - WebhostingBuildAndZip
+          - WebhostingZipOnly
+      webtarget:
+        description: "Choose the secondary option (related to runtime Webhosting)"
         required: true
         default: "Default"
         type: choice
         options:
-          - Default
-          - A1
-          - A2
-          - B1
-          - B2
+          - none
+          - WEBHOSTING001
+          - WEBHOSTING002
+          - WEBHOSTING003
 
 jobs:
   validate:
@@ -28,27 +27,27 @@ jobs:
     steps:
       - name: Validate Input Relationship
         run: |
-          echo "Primary: ${{ github.event.inputs.primary_option }}"
-          echo "Secondary: ${{ github.event.inputs.secondary_option }}"
-          case ${{ github.event.inputs.primary_option }} in
-            "OptionA")
-              case ${{ github.event.inputs.secondary_option }} in
-                "A1"|"A2")
-                  echo "Valid combination: Option A -> ${{ github.event.inputs.secondary_option }}"
+          echo "Runtime: ${{ github.event.inputs.runtime }}"
+          echo "Web Target: ${{ github.event.inputs.webtarget }}"
+          case ${{ github.event.inputs.runtime }} in
+            "WebhostingBuildAndZip")
+              case ${{ github.event.inputs.webtarget }} in
+                "WEBHOSTING001"|"WEBHOSTING003")
+                  echo "Runtime=${{ github.event.inputs.runtime }}  with -> ${{ github.event.inputs.webtarget }}"
                   ;;
                 *)
-                  echo "Invalid secondary option for Option A!" >&2
+                  echo "\033[1;31m*** Invalid Runtime or WebTarget // Please Check ..  ***\033[0m" >&2
                   exit 1
                   ;;
               esac
               ;;
-            "OptionB")
-              case ${{ github.event.inputs.secondary_option }} in
-                "B1"|"B2")
-                  echo "Valid combination: Option B -> ${{ github.event.inputs.secondary_option }}"
+            "WebhostingZipOnly")
+              case ${{ github.event.inputs.webtarget }} in
+                "WEBHOSTING002")
+                  echo "Runtime=${{ github.event.inputs.runtime }}  with -> ${{ github.event.inputs.webtarget }}"
                   ;;
                 *)
-                  echo "Invalid secondary option for Option B!" >&2
+                  echo "\033[1;31m*** Invalid Runtime or WebTarget // Please Check ..  ***\033[0m" >&2
                   exit 1
                   ;;
               esac
