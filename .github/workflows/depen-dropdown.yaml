@@ -12,7 +12,7 @@ on:
               - HeWasNumber1
               - AccountingSucks
       xmlTestSuite:
-         type: choice
+         type: filterChoice
          description: 'XML Test Suite'
          required: true
          default: ''
@@ -31,4 +31,4 @@ jobs:
   Build-CI:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ""
+      - run: echo "$teamName ---- $xmlTestSuite" 
