@@ -11,8 +11,8 @@ on:
         type: choice
         options:
           - java
-          - WebhostingBuildAndZip
-          - WebhostingZipOnly
+          - webhostingBuildAndZip
+          - webhostingZipOnly
       webtarget:
         description: "Web Target (related to runtime Webhosting)"
         required: true
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate Input Relationship
-        if: ${{ inputs.webtarget != 'none' && startsWith(inputs.runtime, 'webhosting') }}
+        if: ${{ inputs.webtarget != 'none' || startsWith(inputs.runtime, 'webhosting') }}
         run: |
           echo "Runtime: ${{ github.event.inputs.runtime }}"
           echo "Web Target: ${{ github.event.inputs.webtarget }}"
