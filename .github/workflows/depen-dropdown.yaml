@@ -57,7 +57,7 @@ jobs:
               esac
               ;;
             *)
-              echo "webtarget cannot be 'none'" >&2
+              echo "\033[1;31m***Invalid Option Match between WebHosting Runtime***\033[0m"
               exit 1
               ;;
           esac
