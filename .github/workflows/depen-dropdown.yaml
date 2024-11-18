@@ -34,7 +34,7 @@ jobs:
           echo "Runtime: ${{ github.event.inputs.runtime }}"
           echo "WebTarget: ${{ github.event.inputs.webtarget }}"
           case ${{ github.event.inputs.runtime }} in
-            "WebhostingBuildAndZip")
+            "webhostingBuildAndZip")
               case ${{ github.event.inputs.webtarget }} in
                 "WEBHOSTING001"|"WEBHOSTING003")
                   echo "Runtime=${{ github.event.inputs.runtime }}  with -> ${{ github.event.inputs.webtarget }}"
@@ -45,7 +45,7 @@ jobs:
                   ;;
               esac
               ;;
-            "WebhostingZipOnly")
+            "webhostingZipOnly")
               case ${{ github.event.inputs.webtarget }} in
                 "WEBHOSTING002")
                   echo "Runtime=${{ github.event.inputs.runtime }}  with -> ${{ github.event.inputs.webtarget }}"
