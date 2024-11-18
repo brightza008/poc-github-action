@@ -8,10 +8,11 @@ on:
         required: true
         type: choice
         options:
+          - java
           - WebhostingBuildAndZip
           - WebhostingZipOnly
       webtarget:
-        description: "Choose the secondary option (related to runtime Webhosting)"
+        description: "Target Web(related to runtime Webhosting)"
         required: true
         default: "Default"
         type: choice
@@ -53,7 +54,7 @@ jobs:
               esac
               ;;
             *)
-              echo "Invalid primary option!" >&2
+              echo "Invalid webtarget option!" >&2
               exit 1
               ;;
           esac
