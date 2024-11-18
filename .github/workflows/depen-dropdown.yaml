@@ -1,0 +1,36 @@
+name: POC_depen_dropdown
+on: 
+    workflow_dispatch:
+     inputs:
+      teamName:
+        type: choice
+        description: "Supported Teams"
+        required: true
+        default: 'HackRockAthon'
+        options:
+              - HackRockAThon
+              - HeWasNumber1
+              - AccountingSucks
+      xmlTestSuite:
+         type: filterChoice
+         description: 'XML Test Suite'
+         required: true
+         default: ''
+         dependsOn: teamName
+         options:
+                optionsFor: HackRockAThon
+                    - SQLInjection.xml
+                    - BlackBox.xml
+                 optionsFor: HeWasNumber1
+                    - smoke.xml
+                    - regression.xml
+                    - sanity.xml
+                 optionsFor: AccountingSucks
+                    - InvoiceChecks.xml
+jobs:
+  Build-CI:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
