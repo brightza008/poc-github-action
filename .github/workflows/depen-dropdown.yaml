@@ -21,11 +21,11 @@ on:
                 optionsFor: HackRockAThon
                     - SQLInjection.xml
                     - BlackBox.xml
-                 optionsFor: HeWasNumber1
+                optionsFor: HeWasNumber1
                     - smoke.xml
                     - regression.xml
                     - sanity.xml
-                 optionsFor: AccountingSucks
+                optionsFor: AccountingSucks
                     - InvoiceChecks.xml
 jobs:
   Build-CI:
