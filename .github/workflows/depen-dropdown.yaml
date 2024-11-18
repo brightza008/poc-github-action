@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate Input Relationship
-        if : ${{inputs.webtarget != "none"}}
+        if: ${{ inputs.webtarget != 'none' }}
         run: |
           echo "Runtime: ${{ github.event.inputs.runtime }}"
           echo "Web Target: ${{ github.event.inputs.webtarget }}"
