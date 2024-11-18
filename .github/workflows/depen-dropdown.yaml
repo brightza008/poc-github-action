@@ -40,7 +40,7 @@ jobs:
                   echo "Runtime=${{ github.event.inputs.runtime }}  with -> ${{ github.event.inputs.webtarget }}"
                   ;;
                 *)
-                  echo "\033[1;31m*** Invalid Runtime or WebTarget // Please Check ..  ***\033[0m" >&2
+                  echo "\033[1;31m*** Invalid Runtime or WebTarget // Please Check ..  ***\033[0m" 
                   exit 1
                   ;;
               esac
@@ -51,13 +51,13 @@ jobs:
                   echo "Runtime=${{ github.event.inputs.runtime }}  with -> ${{ github.event.inputs.webtarget }}"
                   ;;
                 *)
-                  echo "\033[1;31m*** Invalid Runtime or WebTarget // Please Check ..  ***\033[0m" >&2
+                  echo "\033[1;31m*** Invalid Runtime or WebTarget // Please Check ..  ***\033[0m" 
                   exit 1
                   ;;
               esac
               ;;
             *)
-              echo "\033[1;31m***Invalid Option Match between WebHosting Runtime***\033[0m"
+              echo "\033[1;31m*** Invalid parameter between WebHosting Runtime ***\033[0m"
               exit 1
               ;;
           esac
